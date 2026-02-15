@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FarmGeeker AI智能助手 - 你的店，该有个AI员工了</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#0a0a1a;color:#fff;overflow-x:hidden;line-height:1.6}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(45deg,#00d4ff,#7c3aed,#00d4ff);background-size:400% 400%;animation:gradientFlow 15s ease infinite;opacity:0.15;z-index:0}
+@keyframes gradientFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero::after{content:'';position:absolute;width:300px;height:300px;background:radial-gradient(circle,#00ff88 0%,transparent 70%);border-radius:50%;top:20%;left:10%;animation:float 8s ease-in-out infinite;opacity:0.1;z-index:0}
+@keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(50px,50px)}}
+.hero>*{position:relative;z-index:1}
+.logo{font-size:2rem;font-weight:700;color:#00ff88;margin-bottom:2rem;text-shadow:0 0 20px rgba(0,255,136,0.5)}
+.hero h1{font-size:3rem;font-weight:700;margin-bottom:1rem;min-height:4rem}
+.hero h1 .cursor{display:inline-block;width:3px;height:3rem;background:#00ff88;margin-left:5px;animation:blink 1s infinite}
+@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
+.hero .subtitle{font-size:1.2rem;color:#aaa;margin-bottom:3rem;opacity:0;animation:fadeInUp 1s 0.5s forwards}
+@keyframes fadeInUp{to{opacity:1;transform:translateY(0)}from{opacity:0;transform:translateY(20px)}}
+.stats{display:flex;gap:3rem;margin-bottom:3rem;flex-wrap:wrap;justify-content:center}
+.stat-item{opacity:0;animation:fadeInUp 1s forwards}
+.stat-item:nth-child(1){animation-delay:1s}
+.stat-item:nth-child(2){animation-delay:1.2s}
+.stat-item:nth-child(3){animation-delay:1.4s}
+.stat-num{font-size:2.5rem;font-weight:700;color:#00ff88;display:block}
+.stat-label{color:#888;font-size:0.9rem}
+.cta-btn{display:inline-block;padding:18px 50px;background:linear-gradient(135deg,#FF6B35,#ff8f5e);color:#fff;text-decoration:none;border-radius:50px;font-size:1.2rem;font-weight:600;transition:transform 0.3s;animation:pulse 2s infinite;margin-bottom:1rem}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,107,53,0.7)}50%{box-shadow:0 0 0 20px rgba(255,107,53,0)}}
+.cta-btn:hover{transform:scale(1.05)}
+.hero .note{color:#666;font-size:0.9rem}
+section{padding:5rem 0;position:relative}
+.section-title{font-size:2.5rem;text-align:center;margin-bottom:3rem;font-weight:700}
+.fade-in{opacity:0;transform:translateY(30px);transition:opacity 0.6s,transform 0.6s}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+.chat-demo{max-width:400px;margin:0 auto;background:rgba(255,255,255,0.05);border-radius:20px;padding:20px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1)}
+.chat-msg{margin-bottom:15px;opacity:0;animation:msgSlideIn 0.5s forwards}
+@keyframes msgSlideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.chat-msg.ai{text-align:left}
+.chat-msg.user{text-align:right}
+.chat-bubble{display:inline-block;padding:12px 18px;border-radius:18px;max-width:85%;word-wrap:break-word}
+.chat-msg.ai .chat-bubble{background:rgba(0,212,255,0.2);border:1px solid rgba(0,212,255,0.3)}
+.chat-msg.user .chat-bubble{background:rgba(0,255,136,0.2);border:1px solid rgba(0,255,136,0.3)}
+.chat-note{text-align:center;margin-top:2rem;color:#00ff88;font-weight:600}
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem}
+.pain-card{background:rgba(255,255,255,0.05);padding:2rem;border-radius:15px;border:2px solid rgba(255,255,255,0.1);transition:all 0.3s;backdrop-filter:blur(10px)}
+.pain-card:hover{border-color:#00ff88;box-shadow:0 0 30px rgba(0,255,136,0.3);transform:translateY(-5px)}
+.pain-card .emoji{font-size:3rem;display:block;margin-bottom:1rem}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+.feature-card{background:rgba(255,255,255,0.05);padding:2rem;border-radius:15px;border:2px solid rgba(255,255,255,0.1);transition:all 0.3s;backdrop-filter:blur(10px)}
+.feature-card:hover{border-color:#00ff88;box-shadow:0 0 30px rgba(0,255,136,0.3);transform:translateY(-5px)}
+.feature-card .emoji{font-size:3rem;display:block;margin-bottom:1rem}
+.feature-card h3{margin-bottom:0.5rem;color:#00d4ff}
+.feature-card .metric{color:#00ff88;font-weight:700;font-size:1.1rem}
+.compare{display:grid;grid-template-columns:1fr auto 1fr;gap:2rem;align-items:center;max-width:900px;margin:0 auto}
+.compare-col{padding:2rem;border-radius:15px;backdrop-filter:blur(10px)}
+.compare-col.old{background:rgba(255,0,0,0.1);border:2px solid rgba(255,0,0,0.3)}
+.compare-col.new{background:rgba(0,255,136,0.1);border:2px solid rgba(0,255,136,0.3)}
+.compare-vs{font-size:2rem;font-weight:700;color:#7c3aed}
+.compare-item{padding:1rem 0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;gap:10px}
+.compare-item:last-child{border-bottom:none}
+.compare-col.old .compare-item::before{content:'✗';color:#ff4444;font-size:1.5rem}
+.compare-col.new .compare-item::before{content:'✓';color:#00ff88;font-size:1.5rem}
+.cases{overflow:hidden;position:relative}
+.cases-scroll{display:flex;gap:2rem;animation:scroll 20s linear infinite}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.case-card{min-width:300px;background:rgba(255,255,255,0.05);padding:2rem;border-radius:15px;border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(10px)}
+.case-card .emoji{font-size:2rem}
+.case-card .name{font-weight:600;margin:1rem 0 0.5rem;color:#00d4ff}
+.case-card .result{color:#00ff88;font-weight:700;font-size:1.2rem}
+.pricing{background:rgba(0,0,0,0.3)}
+.pricing-subtitle{text-align:center;font-size:1.5rem;margin-bottom:3rem;color:#aaa}
+.pricing-subtitle .old{text-decoration:line-through;color:#ff4444}
+.pricing-subtitle .new{color:#00ff88;font-weight:700}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;max-width:1000px;margin:0 auto}
+.pricing-card{background:rgba(255,255,255,0.05);padding:2.5rem 2rem;border-radius:15px;border:2px solid rgba(255,255,255,0.1);text-align:center;transition:all 0.3s;backdrop-filter:blur(10px);position:relative}
+.pricing-card:hover{transform:scale(1.05);box-shadow:0 10px 40px rgba(0,0,0,0.3)}
+.pricing-card.featured{border-color:#00ff88;box-shadow:0 0 40px rgba(0,255,136,0.3)}
+.pricing-card .badge{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#FF6B35,#ff8f5e);padding:5px 20px;border-radius:20px;font-size:0.9rem;font-weight:600}
+.pricing-card h3{font-size:1.8rem;margin-bottom:1rem;color:#00d4ff}
+.pricing-card .price{font-size:3rem;font-weight:700;color:#00ff88;margin-bottom:0.5rem}
+.pricing-card .price span{font-size:1.2rem;color:#888}
+.pricing-card .setup{color:#aaa;font-size:0.9rem;margin-bottom:2rem}
+.pricing-card ul{list-style:none;margin-bottom:2rem;text-align:left}
+.pricing-card li{padding:0.5rem 0;color:#ccc}
+.pricing-card li::before{content:'✓';color:#00ff88;margin-right:10px;font-weight:700}
+.pricing-note{text-align:center;margin-top:2rem;color:#00ff88;font-weight:600}
+.faq{max-width:800px;margin:0 auto}
+.faq details{background:rgba(255,255,255,0.05);margin-bottom:1rem;border-radius:10px;border:1px solid rgba(255,255,255,0.1);overflow:hidden;backdrop-filter:blur(10px)}
+.faq summary{padding:1.5rem;cursor:pointer;font-weight:600;font-size:1.1rem;transition:background 0.3s}
+.faq summary:hover{background:rgba(255,255,255,0.08)}
+.faq details[open] summary{background:rgba(0,212,255,0.1);color:#00d4ff}
+.faq .answer{padding:0 1.5rem 1.5rem;color:#ccc;line-height:1.8}
+.final-cta{background:linear-gradient(135deg,rgba(0,212,255,0.1),rgba(124,58,237,0.1));text-align:center;padding:5rem 2rem}
+.final-cta h2{font-size:2.5rem;margin-bottom:1rem}
+.final-cta p{font-size:1.3rem;color:#aaa;margin-bottom:2rem}
+.final-cta .contact{margin-top:2rem;font-size:1.1rem}
+.final-cta .contact span{color:#00ff88;font-weight:600;margin:0 1rem}
+footer{text-align:center;padding:2rem;color:#666;border-top:1px solid rgba(255,255,255,0.1)}
+@media(max-width:768px){
+.hero h1{font-size:2rem}
+.hero h1 .cursor{height:2rem}
+.hero .subtitle{font-size:1rem}
+.stats{gap:1.5rem}
+.stat-num{font-size:2rem}
+.section-title{font-size:2rem}
+.compare{grid-template-columns:1fr;gap:1rem}
+.compare-vs{text-align:center}
+.pricing-grid{grid-template-columns:1fr}
+.final-cta h2{font-size:2rem}
+.final-cta p{font-size:1.1rem}
+}
+</style>
+</head>
+<body>
+<section class="hero">
+<div class="logo">FarmGeeker</div>
+<h1 id="typewriter"></h1>
+<p class="subtitle">24小时在线 · 主动发现问题 · 比雇人便宜10倍</p>
+<div class="stats">
+<div class="stat-item"><span class="stat-num" data-target="1200">0</span><span class="stat-label">+ 商户在用</span></div>
+<div class="stat-item"><span class="stat-num" data-target="40">0</span><span class="stat-label">% 营业额提升</span></div>
+<div class="stat-item"><span class="stat-num">¥<span data-target="299">0</span></span><span class="stat-label">起/月</span></div>
+</div>
+<a href="#pricing" class="cta-btn">免费试用7天 →</a>
+<p class="note">7天无理由退款 · 无需下载APP · 微信就能用</p>
+</section>
+
+<section id="demo">
+<div class="container">
+<h2 class="section-title fade-in">看看AI员工怎么帮你盯店</h2>
+<div class="chat-demo fade-in" id="chatDemo"></div>
+<p class="chat-note fade-in">这不是演示，这是真实的AI对话</p>
+</div>
+</section>
+
+<section id="pain">
+<div class="container">
+<h2 class="section-title fade-in">这些场景，是不是天天在发生？</h2>
+<div class="pain-grid">
+<div class="pain-card fade-in"><span class="emoji">😴</span><p>凌晨客户问价，你在睡觉，单子飞了</p></div>
+<div class="pain-card fade-in"><span class="emoji">📊</span><p>每天关门算账，算到头疼还对不上</p></div>
+<div class="pain-card fade-in"><span class="emoji">😢</span><p>老客户悄悄走了，你最后一个知道</p></div>
+<div class="pain-card fade-in"><span class="emoji">🔥</span><p>隔壁搞活动，你三天后才反应过来</p></div>
+</div>
+</div>
+</section>
+
+<section id="features">
+<div class="container">
+<h2 class="section-title fade-in">你的AI员工，能做这些</h2>
+<div class="feature-grid">
+<div class="feature-card fade-in"><span class="emoji">💬</span><h3>24小时智能客服</h3><p class="metric">转化率↑<span data-target="40">0</span>%</p></div>
+<div class="feature-card fade-in"><span class="emoji">📊</span><h3>每日自动报表</h3><p class="metric">每天省<span data-target="30">0</span>分钟</p></div>
+<div class="feature-card fade-in"><span class="emoji">🔔</span><h3>主动发现问题</h3><p class="metric">减少<span data-target="80">0</span>%断货</p></div>
+<div class="feature-card fade-in"><span class="emoji">💕</span><h3>自动客户关怀</h3><p class="metric">复购率↑<span data-target="35">0</span>%</p></div>
+<div class="feature-card fade-in"><span class="emoji">📦</span><h3>智能库存管理</h3><p class="metric">浪费↓<span data-target="60">0</span>%</p></div>
+<div class="feature-card fade-in"><span class="emoji">👀</span><h3>竞品实时监控</h3><p class="metric">不再后知后觉</p></div>
+</div>
+</div>
+</section>
+
+<section id="compare">
+<div class="container">
+<h2 class="section-title fade-in">传统客服 VS AI员工</h2>
+<div class="compare fade-in">
+<div class="compare-col old">
+<div class="compare-item">只能工作8小时</div>
+<div class="compare-item">月薪¥7000+</div>
+<div class="compare-item">需要培训上岗</div>
+<div class="compare-item">情绪波动影响服务</div>
+<div class="compare-item">被动等客户问</div>
+</div>
+<div class="compare-vs">VS</div>
+<div class="compare-col new">
+<div class="compare-item">24小时在线</div>
+<div class="compare-item">月费¥299起</div>
+<div class="compare-item">即开即用</div>
+<div class="compare-item">永远热情专业</div>
+<div class="compare-item">主动发现问题</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="cases">
+<div class="container">
+<h2 class="section-title fade-in">他们已经在用了</h2>
+</div>
+<div class="cases">
+<div class="cases-scroll">
+<div class="case-card"><span class="emoji">🧋</span><p class="name">奶茶店 · 李老板</p><p class="result">营业额提升42%</p></div>
+<div class="case-card"><span class="emoji">🍜</span><p class="name">面馆 · 王老板</p><p class="result">客户复购率↑38%</p></div>
+<div class="case-card"><span class="emoji">💇</span><p class="name">理发店 · 张老板</p><p class="result">预约量增加55%</p></div>
+<div class="case-card"><span class="emoji">🛒</span><p class="name">便利店 · 刘老板</p><p class="result">库存浪费↓65%</p></div>
+<div class="case-card"><span class="emoji">🍰</span><p class="name">烘焙店 · 陈老板</p><p class="result">每天省2小时</p></div>
+<div class="case-card"><span class="emoji">🧋</span><p class="name">奶茶店 · 李老板</p><p class="result">营业额提升42%</p></div>
+<div class="case-card"><span class="emoji">🍜</span><p class="name">面馆 · 王老板</p><p class="result">客户复购率↑38%</p></div>
+<div class="case-card"><span class="emoji">💇</span><p class="name">理发店 · 张老板</p><p class="result">预约量增加55%</p></div>
+</div>
+</div>
+</section>
+
+<section id="pricing" class="pricing">
+<div class="container">
+<h2 class="section-title fade-in">比雇一个人便宜10倍</h2>
+<p class="pricing-subtitle fade-in">雇人 <span class="old">¥7000/月</span> vs AI员工 <span class="new">¥299起/月</span></p>
+<div class="pricing-grid">
+<div class="pricing-card fade-in">
+<h3>基础版</h3>
+<div class="price">¥299<span>/月</span></div>
+<div class="setup">无开通费</div>
+<ul>
+<li>智能客服（500次/月）</li>
+<li>每日自动报表</li>
+<li>基础数据分析</li>
+<li>微信通知</li>
+</ul>
+<a href="#contact" class="cta-btn">立即开通</a>
+</div>
+<div class="pricing-card featured fade-in">
+<div class="badge">🔥 推荐</div>
+<h3>标准版</h3>
+<div class="price">¥599<span>/月</span></div>
+<div class="setup">+ ¥199开通费</div>
+<ul>
+<li>智能客服（无限次）</li>
+<li>高级数据分析</li>
+<li>客户关怀自动化</li>
+<li>库存管理</li>
+<li>竞品监控</li>
+</ul>
+<a href="#contact" class="cta-btn">立即开通</a>
+</div>
+<div class="pricing-card fade-in">
+<h3>高级版</h3>
+<div class="price">¥999<span>/月</span></div>
+<div class="setup">+ ¥299开通费</div>
+<ul>
+<li>标准版全部功能</li>
+<li>多店铺管理</li>
+<li>定制化AI训练</li>
+<li>专属客户经理</li>
+<li>API接口</li>
+</ul>
+<a href="#contact" class="cta-btn">立即开通</a>
+</div>
+</div>
+<p class="pricing-note fade-in">7天免费试用 · 不满意全额退款</p>
+</div>
+</section>
+
+<section id="faq">
+<div class="container">
+<h2 class="section-title fade-in">常见问题</h2>
+<div class="faq fade-in">
+<details>
+<summary>需要下载APP吗？</summary>
+<div class="answer">不需要！FarmGeeker完全基于企业微信运行，无需下载任何APP，添加企业微信即可使用。</div>
+</details>
+<details>
+<summary>AI员工真的能24小时工作吗？</summary>
+<div class="answer">是的！AI员工全年无休，24小时在线响应客户咨询，即使凌晨3点也能秒回客户消息。</div>
+</details>
+<details>
+<summary>会不会很难上手？</summary>
+<div class="answer">完全不会！我们提供一对一开通指导，5分钟即可完成配置。AI会自动学习你的业务，越用越智能。</div>
+</details>
+<details>
+<summary>7天试用期内可以退款吗？</summary>
+<div class="answer">当然可以！7天内如果不满意，无需任何理由，全额退款。我们对产品有信心，让你零风险体验。</div>
+</details>
+<details>
+<summary>我的数据安全吗？</summary>
+<div class="answer">绝对安全！我们采用银行级加密技术，数据仅用于为你提供服务，绝不泄露给第三方。</div>
+</details>
+</div>
+</div>
+</section>
+
+<section id="contact" class="final-cta">
+<div class="container">
+<h2>别让客户等到明天</h2>
+<p>现在开始，7天免费体验</p>
+<a href="#" class="cta-btn">免费试用7天 →</a>
+<div class="contact">
+<span>📱 微信：FarmGeeker</span>
+<span>📞 电话：400-888-8888</span>
+</div>
+</div>
+</section>
+
+<footer>
+<p>© 2026 FarmGeeker · 让每个小店都有AI员工</p>
+</footer>
+
+<script>
+// 打字机效果
+const typewriter = document.getElementById('typewriter');
+const text = '你的店，该有个AI员工了';
+let i = 0;
+function type() {
+  if (i < text.length) {
+    typewriter.innerHTML = text.substring(0, i + 1) + '<span class="cursor"></span>';
+    i++;
+    setTimeout(type, 150);
+  } else {
+    typewriter.innerHTML = text + '<span class="cursor"></span>';
+  }
+}
+setTimeout(type, 500);
+
+// 数字滚动动画
+function animateNumber(element, target, duration = 2000) {
+  const start = 0;
+  const startTime = performance.now();
+  
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const current = Math.floor(progress * target);
+    element.textContent = current;
+    
+    if (progress < 1) {
+      requestAnimationFrame(update);
+    } else {
+      element.textContent = target;
+    }
+  }
+  
+  requestAnimationFrame(update);
+}
+
+// 滚动渐入动画
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      
+      // 触发数字滚动
+      const numElements = entry.target.querySelectorAll('[data-target]');
+      numElements.forEach(el => {
+        const target = parseInt(el.getAttribute('data-target'));
+        animateNumber(el, target);
+      });
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// AI对话动画
+const chatMessages = [
+  { type: 'ai', text: '🤖 AI员工：老板早☀️ 昨天营业额3280元，比上周三↑15%，爆款珍珠奶茶卖了38杯🔥' },
+  { type: 'user', text: '👤 老板：库存还够吗？' },
+  { type: 'ai', text: '🤖 AI员工：珍珠还剩2袋，按昨天的量今天下午就不够了。要我帮你联系供应商补货吗？' },
+  { type: 'user', text: '👤 老板：补货' },
+  { type: 'ai', text: '🤖 AI员工：已通知供应商张哥，预计明早到货 ✅ 另外提醒一下，隔壁奶茶店今天搞第二杯半价，要不要我们也做个活动？' }
+];
+
+let chatStarted = false;
+const chatDemo = document.getElementById('chatDemo');
+
+function startChat() {
+  if (chatStarted) return;
+  chatStarted = true;
+  
+  chatMessages.forEach((msg, index) => {
+    setTimeout(() => {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `chat-msg ${msg.type}`;
+      msgDiv.innerHTML = `<div class="chat-bubble">${msg.text}</div>`;
+      chatDemo.appendChild(msgDiv);
+    }, index * 2000);
+  });
+}
+
+// 监听聊天区域进入视口
+const chatObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      startChat();
+    }
+  });
+}, { threshold: 0.5 });
+
+chatObserver.observe(chatDemo);
+
+// 首屏数字滚动（页面加载后自动触发）
+setTimeout(() => {
+  document.querySelectorAll('.stats [data-target]').forEach(el => {
+    const target = parseInt(el.getAttribute('data-target'));
+    animateNumber(el, target);
+  });
+}, 1600);
+</script>
+</body>
+</html>
