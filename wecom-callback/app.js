@@ -311,15 +311,42 @@ function checkProactiveMessages() {
 
 setInterval(checkProactiveMessages, 60 * 60 * 1000);
 
-// === XML 解析 ===
+// === XML 解析（增强版，支持事件）===
 function parseXML(xml) {
   const get = (tag) => {
     const m = xml.match(new RegExp('<' + tag + '><!\\[CDATA\\[(.+?)\\]\\]></' + tag + '>')) ||
               xml.match(new RegExp('<' + tag + '>(.+?)</' + tag + '>'));
     return m ? m[1] : '';
   };
-  return { ToUserName: get('ToUserName'), FromUserName: get('FromUserName'),
-    MsgType: get('MsgType'), Content: get('Content'), Encrypt: get('Encrypt') };
+  return {
+    ToUserName: get('ToUserName'), FromUserName: get('FromUserName'),
+    MsgType: get('MsgType'), Content: get('Content'), Encrypt: get('Encrypt'),
+    Event: get('Event'), EventKey: get('EventKey'), AgentID: get('AgentID')
+  };
+}
+
+// === 欢迎消息 ===
+async function sendWelcome(userId, source) {
+  const customer = loadCustomer(userId);
+  let msg;
+  if (source === 'partner') {
+    msg = '你好！欢迎了解"不打烊"城市合伙人计划 🤝\n\n';
+    msg += '推荐1个客户年赚¥1,400-4,260，续费持续分润30%。\n';
+    msg += '认真做6个月月入过万，不是梦。\n\n';
+    msg += '你可以直接问我任何问题，比如：\n';
+    msg += '• 怎么赚钱？\n• 需要投入多少？\n• 怎么推广？';
+    customer.tags = [...new Set([...customer.tags, '合伙人意向'])];
+  } else {
+    msg = '你好老板！我是小不，"不打烊"AI助手的商务顾问 👋\n\n';
+    msg += '我们帮生鲜店/水果店实现：\n';
+    msg += '• 24小时AI自动回复客户\n• 智能营销（朋友圈文案、促销方案）\n• 客户数据分析\n\n';
+    msg += '免费试用7天，你可以直接问我，比如：\n';
+    msg += '• 怎么用？\n• 多少钱？\n• 适合我的店吗？';
+    customer.tags = [...new Set([...customer.tags, '潜在客户'])];
+  }
+  saveCustomer(userId, customer);
+  await sendMessage(userId, msg);
+  console.log('[Welcome] sent to', userId, 'source:', source);
 }
 
 // === HTTP 服务器 ===
@@ -370,7 +397,17 @@ const server = http.createServer(async (req, res) => {
           if (sig !== msg_signature) { console.error('[Msg] bad sig'); return; }
           const decXml = decrypt(xml.Encrypt);
           const msg = parseXML(decXml);
-          console.log('[Msg] ' + msg.FromUserName + ': ' + msg.Content);
+          console.log('[Msg] ' + msg.FromUserName + ' type=' + msg.MsgType + (msg.Event ? ' event=' + msg.Event : '') + (msg.Content ? ' content=' + msg.Content : ''));
+
+          // 事件消息（关注、进入应用等）
+          if (msg.MsgType === 'event') {
+            if (msg.Event === 'subscribe' || msg.Event === 'enter_agent') {
+              const source = (msg.EventKey && msg.EventKey.includes('partner')) ? 'partner' : 'customer';
+              await sendWelcome(msg.FromUserName, source);
+            }
+            return;
+          }
+
           if (msg.MsgType === 'text' && msg.Content) {
             const reply = await getAIReply(msg.Content, msg.FromUserName);
             console.log('[Reply] ' + reply.slice(0, 80));
