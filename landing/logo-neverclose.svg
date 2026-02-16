@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0a1e"/>
+      <stop offset="100%" style="stop-color:#0a0a1a"/>
+    </linearGradient>
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF2D55"/>
+      <stop offset="100%" style="stop-color:#E63946"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="textGlow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bgGrad)"/>
+  
+  <!-- Small store icon with 24h - top area -->
+  <g transform="translate(512, 280)" filter="url(#glow)">
+    <!-- Door frame -->
+    <rect x="-80" y="-60" width="160" height="150" rx="10" fill="none" stroke="url(#redGrad)" stroke-width="4"/>
+    <!-- Door arch -->
+    <path d="M-80,-30 Q-80,-80 0,-80 Q80,-80 80,-30" fill="none" stroke="url(#redGrad)" stroke-width="4"/>
+    <!-- Door split -->
+    <line x1="0" y1="-60" x2="0" y2="90" stroke="#FF2D55" stroke-width="2" opacity="0.4"/>
+    <!-- Door handles -->
+    <circle cx="-12" cy="20" r="5" fill="#FF2D55"/>
+    <circle cx="12" cy="20" r="5" fill="#FF2D55"/>
+    <!-- OPEN light -->
+    <rect x="-45" y="-45" width="90" height="28" rx="14" fill="#FF2D55" opacity="0.15"/>
+    <rect x="-45" y="-45" width="90" height="28" rx="14" fill="none" stroke="#FF2D55" stroke-width="1.5"/>
+    <text x="0" y="-25" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#FF2D55" letter-spacing="4">OPEN</text>
+    <!-- 24h badge -->
+    <circle cx="90" cy="-60" r="30" fill="#0a0a1a" stroke="#FF2D55" stroke-width="2.5"/>
+    <text x="90" y="-65" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#FF2D55">24</text>
+    <text x="90" y="-48" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" fill="#FF6B8A">h</text>
+  </g>
+  
+  <!-- Circuit lines - subtle -->
+  <g stroke="#FF2D55" stroke-width="1.2" opacity="0.3">
+    <line x1="370" y1="280" x2="432" y2="280"/>
+    <line x1="592" y1="280" x2="654" y2="280"/>
+    <circle cx="370" cy="280" r="3" fill="#FF2D55"/>
+    <circle cx="654" cy="280" r="3" fill="#FF2D55"/>
+    <line x1="370" y1="280" x2="355" y2="265"/>
+    <line x1="370" y1="280" x2="355" y2="295"/>
+    <circle cx="355" cy="265" r="3" fill="#FF2D55"/>
+    <circle cx="355" cy="295" r="3" fill="#FF2D55"/>
+    <line x1="654" y1="280" x2="669" y2="265"/>
+    <line x1="654" y1="280" x2="669" y2="295"/>
+    <circle cx="669" cy="265" r="3" fill="#FF2D55"/>
+    <circle cx="669" cy="295" r="3" fill="#FF2D55"/>
+  </g>
+
+  <!-- Main text: 不打烊 - BIG -->
+  <text x="512" y="560" text-anchor="middle" font-family="'PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif" font-size="150" font-weight="900" fill="#FFFFFF" filter="url(#textGlow)" letter-spacing="20">不打烊</text>
+  
+  <!-- English: NeverClose -->
+  <text x="512" y="660" text-anchor="middle" font-family="Arial,sans-serif" font-size="56" font-weight="300" fill="#FF2D55" filter="url(#textGlow)" letter-spacing="10">NeverClose</text>
+  
+  <!-- Divider line -->
+  <line x1="350" y1="700" x2="674" y2="700" stroke="#FF2D55" stroke-width="1" opacity="0.3"/>
+  
+  <!-- Tagline -->
+  <text x="512" y="760" text-anchor="middle" font-family="'PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif" font-size="36" fill="#888" letter-spacing="8">你的店不打烊</text>
+  
+  <!-- Bottom dots -->
+  <g opacity="0.4">
+    <circle cx="430" cy="830" r="3" fill="#FF2D55"/>
+    <circle cx="470" cy="830" r="3" fill="#FF2D55"/>
+    <circle cx="510" cy="830" r="3" fill="#FF2D55"/>
+    <circle cx="550" cy="830" r="3" fill="#FF2D55"/>
+    <circle cx="590" cy="830" r="3" fill="#FF2D55"/>
+  </g>
+</svg>
