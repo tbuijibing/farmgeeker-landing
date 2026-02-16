@@ -2,796 +2,302 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>不打烊 - 你的生鲜店该有个AI员工了</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>不打烊 NeverClose - 你的店不打烊</title>
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  background: linear-gradient(180deg, #0a0a1a 0%, #0f0f23 100%);
-  color: #fff;
-  overflow-x: hidden;
-  line-height: 1.6;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* Particle Background */
-#particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  opacity: 0.4;
-}
-
-section {
-  position: relative;
-  z-index: 1;
-  padding: 100px 0;
-}
-
-/* Hero Section */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 60px 20px;
-}
-
-.hero h1 {
-  font-size: 72px;
-  font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 30px;
-  background: linear-gradient(135deg, #FF2D55 0%, #FF6B8A 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  opacity: 0;
-  animation: fadeInUp 1s ease forwards;
-}
-
-.hero .subtitle {
-  font-size: 24px;
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 50px;
-  opacity: 0;
-  animation: fadeInUp 1s ease 0.3s forwards;
-}
-
-.btn-group {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  flex-wrap: wrap;
-  opacity: 0;
-  animation: fadeInUp 1s ease 0.6s forwards;
-}
-
-.btn {
-  padding: 18px 40px;
-  font-size: 18px;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
-  font-weight: 600;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #FF2D55 0%, #FF6B8A 100%);
-  color: #fff;
-  border: none;
-  box-shadow: 0 10px 30px rgba(255, 45, 85, 0.3);
-}
-
-.btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 40px rgba(255, 45, 85, 0.5);
-}
-
-.btn-outline {
-  background: transparent;
-  color: #FF2D55;
-  border: 2px solid #FF2D55;
-}
-
-.btn-outline:hover {
-  background: rgba(255, 45, 85, 0.1);
-  transform: translateY(-3px);
-}
-
-/* Section Title */
-.section-title {
-  text-align: center;
-  font-size: 48px;
-  font-weight: 700;
-  margin-bottom: 80px;
-  background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.6) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Glass Cards */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  margin-top: 60px;
-}
-
-.glass-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  padding: 40px;
-  transition: all 0.4s ease;
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.glass-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.glass-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 60px rgba(255, 45, 85, 0.2);
-  border-color: rgba(255, 45, 85, 0.3);
-}
-
-.glass-card .icon {
-  font-size: 48px;
-  margin-bottom: 20px;
-}
-
-.glass-card h3 {
-  font-size: 24px;
-  margin-bottom: 15px;
-  color: #fff;
-}
-
-.glass-card p {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 16px;
-  line-height: 1.8;
-}
-
-/* Stats Section */
-.stats {
-  background: rgba(255, 45, 85, 0.05);
-  border-top: 1px solid rgba(255, 45, 85, 0.2);
-  border-bottom: 1px solid rgba(255, 45, 85, 0.2);
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 40px;
-  text-align: center;
-}
-
-.stat-item {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.stat-item.visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 0.6s ease;
-}
-
-.stat-number {
-  font-size: 56px;
-  font-weight: 800;
-  background: linear-gradient(135deg, #FF2D55 0%, #FF6B8A 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 10px;
-}
-
-.stat-label {
-  font-size: 18px;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-/* Chat Demo */
-.chat-demo {
-  max-width: 600px;
-  margin: 60px auto;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  padding: 30px;
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.chat-demo.visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 0.6s ease;
-}
-
-.chat-message {
-  margin-bottom: 20px;
-  opacity: 0;
-  animation: fadeIn 0.5s ease forwards;
-}
-
-.chat-message.user {
-  text-align: right;
-}
-
-.chat-bubble {
-  display: inline-block;
-  padding: 15px 20px;
-  border-radius: 18px;
-  max-width: 80%;
-  font-size: 16px;
-}
-
-.chat-message.user .chat-bubble {
-  background: rgba(255, 45, 85, 0.2);
-  color: #fff;
-}
-
-.chat-message.ai .chat-bubble {
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.9);
-}
-
-/* Pricing Cards */
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-  margin-top: 60px;
-}
-
-.pricing-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  padding: 40px;
-  transition: all 0.4s ease;
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.pricing-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.pricing-card.featured {
-  border: 2px solid #FF2D55;
-  transform: scale(1.05);
-}
-
-.pricing-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 20px 60px rgba(255, 45, 85, 0.3);
-}
-
-.pricing-card .badge {
-  display: inline-block;
-  background: linear-gradient(135deg, #FF2D55 0%, #FF6B8A 100%);
-  color: #fff;
-  padding: 5px 15px;
-  border-radius: 20px;
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-.pricing-card h3 {
-  font-size: 28px;
-  margin-bottom: 20px;
-}
-
-.pricing-card .price {
-  font-size: 20px;
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 10px;
-}
-
-.pricing-card .price-detail {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 30px;
-}
-
-.pricing-card ul {
-  list-style: none;
-  margin-bottom: 30px;
-}
-
-.pricing-card li {
-  padding: 10px 0;
-  color: rgba(255, 255, 255, 0.7);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.pricing-card li:before {
-  content: "✓ ";
-  color: #FF2D55;
-  font-weight: bold;
-  margin-right: 10px;
-}
-
-.pricing-note {
-  text-align: center;
-  margin-top: 30px;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 14px;
-}
-
-/* Testimonials */
-.testimonial-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  margin-top: 60px;
-}
-
-.testimonial-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  padding: 30px;
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.testimonial-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 0.6s ease;
-}
-
-.testimonial-card .author {
-  font-weight: 600;
-  color: #FF2D55;
-  margin-bottom: 10px;
-}
-
-.testimonial-card .content {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 16px;
-  line-height: 1.8;
-}
-
-/* CTA Section */
-.cta {
-  text-align: center;
-  padding: 100px 20px;
-}
-
-.cta h2 {
-  font-size: 42px;
-  margin-bottom: 40px;
-  background: linear-gradient(135deg, #FF2D55 0%, #FF6B8A 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.qr-code {
-  width: 200px;
-  height: 200px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  margin: 30px auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 14px;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 40px 20px;
-  border-top: 1px solid rgba(255, 45, 85, 0.2);
-  color: rgba(255, 255, 255, 0.5);
-}
-
-/* Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 42px;
-  }
-  
-  .hero .subtitle {
-    font-size: 18px;
-  }
-  
-  .section-title {
-    font-size: 32px;
-  }
-  
-  .btn-group {
-    flex-direction: column;
-  }
-  
-  .btn {
-    width: 100%;
-  }
-  
-  section {
-    padding: 60px 0;
-  }
-  
-  .stat-number {
-    font-size: 42px;
-  }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#0a0a0f;color:#fff;overflow-x:hidden}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.particles{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+.particle{position:absolute;width:2px;height:2px;background:#FF2D55;border-radius:50%;opacity:0;animation:float 8s infinite}
+@keyframes float{0%,100%{opacity:0;transform:translateY(0)}50%{opacity:.6}100%{transform:translateY(-100vh)}}
+.hero-content{text-align:center;z-index:1;padding:40px 20px}
+.hero h1{font-size:clamp(2.5rem,8vw,5rem);font-weight:700;background:linear-gradient(135deg,#fff 0%,#FF2D55 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:24px;animation:fadeInUp 1s ease}
+.hero p{font-size:clamp(1.2rem,3vw,1.8rem);color:#999;margin-bottom:40px;animation:fadeInUp 1s ease .2s both}
+.cta-btn{display:inline-block;padding:16px 48px;background:linear-gradient(135deg,#FF2D55,#ff6b8a);border-radius:50px;color:#fff;text-decoration:none;font-size:1.2rem;font-weight:600;box-shadow:0 0 30px rgba(255,45,85,.5);transition:all .3s;animation:fadeInUp 1s ease .4s both}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(255,45,85,.8)}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+section{padding:100px 0;position:relative}
+.section-title{text-align:center;font-size:clamp(2rem,5vw,3rem);margin-bottom:60px;background:linear-gradient(135deg,#fff,#FF2D55);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.glass-card{background:rgba(255,255,255,.05);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:40px;transition:all .3s;opacity:0;transform:translateY(30px)}
+.glass-card.visible{opacity:1;transform:translateY(0)}
+.glass-card:hover{transform:translateY(-5px);border-color:rgba(255,45,85,.5);box-shadow:0 10px 40px rgba(255,45,85,.2)}
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px}
+.pain-item{text-align:center}
+.pain-icon{font-size:3rem;margin-bottom:20px}
+.pain-item h3{font-size:1.5rem;margin-bottom:15px;color:#FF2D55}
+.pain-item p{color:#999;line-height:1.6}
+.solution-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px}
+.solution-item h3{font-size:1.3rem;margin-bottom:15px;color:#fff}
+.solution-item p{color:#999;line-height:1.8}
+.chat-demo{max-width:600px;margin:0 auto;background:rgba(255,255,255,.03);border-radius:20px;padding:30px;border:1px solid rgba(255,255,255,.1)}
+.chat-msg{display:flex;margin-bottom:20px;opacity:0;animation:slideIn .5s forwards}
+@keyframes slideIn{to{opacity:1}}
+.chat-msg.user{justify-content:flex-end}
+.chat-bubble{max-width:70%;padding:12px 20px;border-radius:18px;line-height:1.5}
+.chat-msg.ai .chat-bubble{background:rgba(255,45,85,.2);border:1px solid rgba(255,45,85,.3)}
+.chat-msg.user .chat-bubble{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2)}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;max-width:1000px;margin:0 auto}
+.price-card{position:relative}
+.price-card.featured{transform:scale(1.05);border-color:#FF2D55;box-shadow:0 0 40px rgba(255,45,85,.3)}
+.price-badge{position:absolute;top:-15px;right:20px;background:linear-gradient(135deg,#FF2D55,#ff6b8a);padding:6px 20px;border-radius:20px;font-size:.9rem;font-weight:600}
+.price-card h3{font-size:1.8rem;margin-bottom:10px}
+.price-amount{font-size:2.5rem;color:#FF2D55;margin:20px 0}
+.price-amount small{font-size:1rem;color:#999}
+.price-features{list-style:none;margin:30px 0}
+.price-features li{padding:10px 0;color:#999;border-bottom:1px solid rgba(255,255,255,.05)}
+.price-features li:before{content:"✓";color:#FF2D55;margin-right:10px;font-weight:700}
+.testimonial-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px}
+.testimonial-item{position:relative;padding-left:60px}
+.testimonial-avatar{position:absolute;left:0;top:0;width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#FF2D55,#ff6b8a);display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+.testimonial-item h4{margin-bottom:10px;color:#fff}
+.testimonial-item p{color:#999;line-height:1.6;font-style:italic}
+.final-cta{text-align:center;padding:80px 20px;background:linear-gradient(135deg,rgba(255,45,85,.1),rgba(255,45,85,.05));border-radius:30px}
+.final-cta h2{font-size:clamp(2rem,5vw,3rem);margin-bottom:20px}
+.final-cta p{font-size:1.2rem;color:#999;margin-bottom:40px}
+.counter{font-size:3rem;font-weight:700;color:#FF2D55}
+@media(max-width:768px){
+section{padding:60px 0}
+.glass-card{padding:30px}
+.pricing-grid{grid-template-columns:1fr}
+.price-card.featured{transform:scale(1)}
 }
 </style>
 </head>
 <body>
+<div class="hero">
+<canvas class="particles" id="particles"></canvas>
+<div class="hero-content">
+<h1>你的店不打烊</h1>
+<p>AI智能客服，24小时自动接单回复</p>
+<a href="#pricing" class="cta-btn">免费试用7天</a>
+</div>
+</div>
 
-<canvas id="particles"></canvas>
-
-<!-- Hero Section -->
-<section class="hero">
-  <div class="container">
-    <h1 id="hero-title"></h1>
-    <p class="subtitle">每天300条消息回不过来？AI帮你24小时自动回复，漏单率降70%</p>
-    <div class="btn-group">
-      <a href="#pricing" class="btn btn-primary">免费试用7天</a>
-      <a href="#testimonials" class="btn btn-outline">查看案例</a>
-    </div>
-  </div>
+<section id="pain">
+<div class="container">
+<h2 class="section-title">生鲜店老板的痛点</h2>
+<div class="pain-grid">
+<div class="glass-card">
+<div class="pain-item">
+<div class="pain-icon">😴</div>
+<h3>深夜无人接单</h3>
+<p>凌晨订单无人回复，客户流失到竞争对手</p>
+</div>
+</div>
+<div class="glass-card">
+<div class="pain-item">
+<div class="pain-icon">🏃</div>
+<h3>忙时顾此失彼</h3>
+<p>高峰期忙不过来，微信消息回复不及时</p>
+</div>
+</div>
+<div class="glass-card">
+<div class="pain-item">
+<div class="pain-icon">📱</div>
+<h3>重复问题太多</h3>
+<p>每天回答相同问题，浪费大量时间精力</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 
-<!-- Pain Points -->
-<section id="pain-points">
-  <div class="container">
-    <h2 class="section-title">你是不是也有这些烦恼？</h2>
-    <div class="card-grid">
-      <div class="glass-card">
-        <div class="icon">😫</div>
-        <h3>消息回不过来</h3>
-        <p>每天300+条微信，漏单率30%，一年丢10万+</p>
-      </div>
-      <div class="glass-card">
-        <div class="icon">📉</div>
-        <h3>不会做营销</h3>
-        <p>朋友圈不知道发什么，团购接龙搞不定</p>
-      </div>
-      <div class="glass-card">
-        <div class="icon">😵</div>
-        <h3>管理靠记忆</h3>
-        <p>会员信息、预订记录全靠脑子记</p>
-      </div>
-    </div>
-  </div>
+<section id="solution">
+<div class="container">
+<h2 class="section-title">不打烊AI解决方案</h2>
+<div class="solution-grid">
+<div class="glass-card">
+<div class="solution-item">
+<h3>🤖 24小时智能客服</h3>
+<p>AI自动回复客户咨询，深夜凌晨也不错过订单，接单率提升<span class="counter" data-target="80">0</span>%</p>
+</div>
+</div>
+<div class="glass-card">
+<div class="solution-item">
+<h3>⚡ 秒级响应速度</h3>
+<p>客户消息1秒内自动回复，高峰期也能应对自如，客户满意度提升<span class="counter" data-target="95">0</span>%</p>
+</div>
+</div>
+<div class="glass-card">
+<div class="solution-item">
+<h3>🎯 智能推荐商品</h3>
+<p>根据客户需求推荐合适商品，自动发送图片价格，转化率提升<span class="counter" data-target="60">0</span>%</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 
-<!-- Solutions -->
-<section id="solutions">
-  <div class="container">
-    <h2 class="section-title">AI帮你搞定一切</h2>
-    <div class="card-grid">
-      <div class="glass-card">
-        <div class="icon">🤖</div>
-        <h3>AI自动回复</h3>
-        <p>库存、价格、配送自动答，准确率95%，24小时在线</p>
-      </div>
-      <div class="glass-card">
-        <div class="icon">📱</div>
-        <h3>智能营销</h3>
-        <p>自动生成"今日特价""周末团购"文案，一键发朋友圈</p>
-      </div>
-      <div class="glass-card">
-        <div class="icon">📊</div>
-        <h3>数据分析</h3>
-        <p>哪些水果好卖、什么时段下单多，AI帮你看数据</p>
-      </div>
-    </div>
-  </div>
+<section id="demo">
+<div class="container">
+<h2 class="section-title">AI对话演示</h2>
+<div class="glass-card">
+<div class="chat-demo" id="chatDemo">
+<div class="chat-msg user" style="animation-delay:.5s">
+<div class="chat-bubble">老板，现在有新鲜的草莓吗？</div>
+</div>
+<div class="chat-msg ai" style="animation-delay:1.5s">
+<div class="chat-bubble">您好！我们刚到一批新鲜草莓🍓，丹东99红颜，个大饱满，甜度高达15度，现在特价￥29.9/斤，需要帮您预留吗？</div>
+</div>
+<div class="chat-msg user" style="animation-delay:3s">
+<div class="chat-bubble">多少钱一斤？能送货上门吗？</div>
+</div>
+<div class="chat-msg ai" style="animation-delay:4.5s">
+<div class="chat-bubble">草莓￥29.9/斤，3公里内免费配送，30分钟送达。您的地址是？我帮您下单📦</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 
-<!-- Stats -->
-<section class="stats">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <div class="stat-number" data-target="300">0</div>
-        <div class="stat-label">服务商户</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" data-target="35">0</div>
-        <div class="stat-label">平均提升营业额</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" data-target="2">0</div>
-        <div class="stat-label">每天节省时间</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" data-target="98">0</div>
-        <div class="stat-label">客户满意度</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Chat Demo -->
-<section id="chat-demo">
-  <div class="container">
-    <h2 class="section-title">看看AI怎么回复客户</h2>
-    <div class="chat-demo">
-      <div class="chat-message user" style="animation-delay: 0.5s;">
-        <div class="chat-bubble">有草莓吗？多少钱？</div>
-      </div>
-      <div class="chat-message ai" style="animation-delay: 1.5s;">
-        <div class="chat-bubble">有的！今天丹东99草莓特价¥39.9/斤，买2斤送半斤。需要帮您留吗？</div>
-      </div>
-      <div class="chat-message user" style="animation-delay: 2.5s;">
-        <div class="chat-bubble">留2斤，下午来取</div>
-      </div>
-      <div class="chat-message ai" style="animation-delay: 3.5s;">
-        <div class="chat-bubble">好的，已为您预留2斤草莓，取货时间下午。到店后报手机尾号即可 🍓</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Pricing -->
 <section id="pricing">
-  <div class="container">
-    <h2 class="section-title">选择适合你的方案</h2>
-    <div class="pricing-grid">
-      <div class="pricing-card">
-        <h3>基础版</h3>
-        <div class="price">初装费 ¥800 + 年费 ¥2,880</div>
-        <div class="price-detail">月均 ¥240</div>
-        <ul>
-          <li>AI自动回复</li>
-          <li>基础数据报表</li>
-          <li>微信群管理</li>
-        </ul>
-        <a href="#cta" class="btn btn-outline" style="width: 100%;">选择方案</a>
-      </div>
-      
-      <div class="pricing-card featured">
-        <span class="badge">⭐ 推荐</span>
-        <h3>标准版</h3>
-        <div class="price">初装费 ¥1,200 + 年费 ¥5,760</div>
-        <div class="price-detail">月均 ¥480</div>
-        <ul>
-          <li>全部基础功能</li>
-          <li>智能营销文案</li>
-          <li>客户画像分析</li>
-          <li>专属客服</li>
-        </ul>
-        <a href="#cta" class="btn btn-primary" style="width: 100%;">选择方案</a>
-      </div>
-      
-      <div class="pricing-card">
-        <h3>专业版</h3>
-        <div class="price">初装费 ¥1,800 + 年费 ¥9,600</div>
-        <div class="price-detail">月均 ¥800</div>
-        <ul>
-          <li>全部标准功能</li>
-          <li>供应链对接</li>
-          <li>多店管理</li>
-          <li>定制开发</li>
-        </ul>
-        <a href="#cta" class="btn btn-outline" style="width: 100%;">选择方案</a>
-      </div>
-    </div>
-    <p class="pricing-note">对比雇人：一个兼职客服月薪¥3000+，AI助手月均¥240起</p>
-  </div>
+<div class="container">
+<h2 class="section-title">选择适合你的方案</h2>
+<div class="pricing-grid">
+<div class="glass-card price-card">
+<h3>基础版</h3>
+<div class="price-amount">¥240<small>/月</small></div>
+<p style="color:#999;margin-bottom:20px">初装费¥800 + 年费¥2,880</p>
+<ul class="price-features">
+<li>AI自动回复</li>
+<li>基础商品推荐</li>
+<li>500条/月消息</li>
+<li>微信客服支持</li>
+</ul>
+<a href="#" class="cta-btn" style="width:100%;text-align:center;margin-top:20px">立即试用</a>
+</div>
+<div class="glass-card price-card featured">
+<div class="price-badge">⭐ 推荐</div>
+<h3>标准版</h3>
+<div class="price-amount">¥480<small>/月</small></div>
+<p style="color:#999;margin-bottom:20px">初装费¥1,200 + 年费¥5,760</p>
+<ul class="price-features">
+<li>基础版全部功能</li>
+<li>智能商品推荐</li>
+<li>2000条/月消息</li>
+<li>订单自动记录</li>
+<li>数据分析报表</li>
+</ul>
+<a href="#" class="cta-btn" style="width:100%;text-align:center;margin-top:20px">立即试用</a>
+</div>
+<div class="glass-card price-card">
+<h3>专业版</h3>
+<div class="price-amount">¥800<small>/月</small></div>
+<p style="color:#999;margin-bottom:20px">初装费¥1,800 + 年费¥9,600</p>
+<ul class="price-features">
+<li>标准版全部功能</li>
+<li>无限消息量</li>
+<li>多店铺管理</li>
+<li>VIP专属客服</li>
+<li>定制化功能</li>
+</ul>
+<a href="#" class="cta-btn" style="width:100%;text-align:center;margin-top:20px">立即试用</a>
+</div>
+</div>
+</div>
 </section>
 
-<!-- Testimonials -->
 <section id="testimonials">
-  <div class="container">
-    <h2 class="section-title">他们都在用</h2>
-    <div class="testimonial-grid">
-      <div class="testimonial-card">
-        <div class="author">杭州王老板（水果店）</div>
-        <div class="content">"用了2个月，漏单率从30%降到5%，每天多赚500块"</div>
-      </div>
-      <div class="testimonial-card">
-        <div class="author">成都李姐（生鲜超市）</div>
-        <div class="content">"朋友圈文案再也不用自己想了，AI写的比我好10倍"</div>
-      </div>
-      <div class="testimonial-card">
-        <div class="author">武汉张哥（社区菜店）</div>
-        <div class="content">"以前每天回消息到凌晨，现在AI帮我回，终于能睡个好觉"</div>
-      </div>
-    </div>
-  </div>
+<div class="container">
+<h2 class="section-title">客户评价</h2>
+<div class="testimonial-grid">
+<div class="glass-card">
+<div class="testimonial-item">
+<div class="testimonial-avatar">张</div>
+<h4>张老板 - 水果店</h4>
+<p>"用了不打烊后，凌晨订单增加了50%，再也不用担心睡觉时错过客户了！"</p>
+</div>
+</div>
+<div class="glass-card">
+<div class="testimonial-item">
+<div class="testimonial-avatar">李</div>
+<h4>李姐 - 生鲜超市</h4>
+<p>"AI回复速度超快，客户都以为是真人在回复，满意度大幅提升！"</p>
+</div>
+</div>
+<div class="glass-card">
+<div class="testimonial-item">
+<div class="testimonial-avatar">王</div>
+<h4>王总 - 连锁水果店</h4>
+<p>"3家店都在用，每月节省2个客服人员的成本，一年省下10万块！"</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 
-<!-- CTA -->
-<section class="cta" id="cta">
-  <div class="container">
-    <h2>扫码添加企业微信，免费试用7天</h2>
-    <div class="qr-code">企业微信二维码</div>
-    <p style="color: rgba(255,255,255,0.6); margin-top: 20px;">联系方式：support@neverclose.ai</p>
-  </div>
+<section>
+<div class="container">
+<div class="glass-card final-cta">
+<h2>立即开启你的AI客服</h2>
+<p>免费试用7天，无需信用卡，随时可取消</p>
+<a href="#" class="cta-btn">免费试用</a>
+</div>
+</div>
 </section>
-
-<!-- Footer -->
-<footer>
-  <p>不打烊 NeverClose © 2026</p>
-</footer>
 
 <script>
-// Particle Animation
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const particles = [];
-const particleCount = 80;
-
-for (let i = 0; i < particleCount; i++) {
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    radius: Math.random() * 2 + 1,
-    vx: (Math.random() - 0.5) * 0.5,
-    vy: (Math.random() - 0.5) * 0.5
-  });
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+const particles=[];
+for(let i=0;i<50;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+vx:(Math.random()-.5)*2,
+vy:-Math.random()*2-1,
+size:Math.random()*2+1
+});
 }
-
-function drawParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = 'rgba(255, 45, 85, 0.5)';
-  
-  particles.forEach(p => {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-    ctx.fill();
-    
-    p.x += p.vx;
-    p.y += p.vy;
-    
-    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-  });
-  
-  requestAnimationFrame(drawParticles);
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+particles.forEach(p=>{
+ctx.fillStyle='rgba(255,45,85,'+(Math.random()*.5+.3)+')';
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+ctx.fill();
+p.x+=p.vx;
+p.y+=p.vy;
+if(p.y<0)p.y=canvas.height;
+if(p.x<0||p.x>canvas.width)p.vx*=-1;
+});
+requestAnimationFrame(animate);
 }
-
-drawParticles();
-
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+animate();
+window.addEventListener('resize',()=>{
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
 });
 
-// Typewriter Effect
-const heroTitle = document.getElementById('hero-title');
-const text = '你的生鲜店\n该有个AI员工了';
-let index = 0;
-
-function typeWriter() {
-  if (index < text.length) {
-    if (text[index] === '\n') {
-      heroTitle.innerHTML += '<br>';
-    } else {
-      heroTitle.textContent += text[index];
-    }
-    index++;
-    setTimeout(typeWriter, 100);
-  }
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add('visible');
+if(entry.target.querySelector('.counter')){
+entry.target.querySelectorAll('.counter').forEach(counter=>{
+const target=+counter.dataset.target;
+let current=0;
+const increment=target/50;
+const timer=setInterval(()=>{
+current+=increment;
+if(current>=target){
+counter.textContent=target;
+clearInterval(timer);
+}else{
+counter.textContent=Math.floor(current);
 }
-
-setTimeout(typeWriter, 500);
-
-// Intersection Observer for Fade-in
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, observerOptions);
-
-document.querySelectorAll('.glass-card, .pricing-card, .testimonial-card, .chat-demo, .stat-item').forEach(el => {
-  observer.observe(el);
+},30);
 });
-
-// Number Counter Animation
-function animateCounter(element) {
-  const target = parseInt(element.getAttribute('data-target'));
-  const duration = 2000;
-  const step = target / (duration / 16);
-  let current = 0;
-  
-  const timer = setInterval(() => {
-    current += step;
-    if (current >= target) {
-      element.textContent = target + (element.parentElement.querySelector('.stat-label').textContent.includes('营业额') || element.parentElement.querySelector('.stat-label').textContent.includes('满意度') ? '%' : element.parentElement.querySelector('.stat-label').textContent.includes('时间') ? 'h' : '+');
-      clearInterval(timer);
-    } else {
-      element.textContent = Math.floor(current) + (element.parentElement.querySelector('.stat-label').textContent.includes('营业额') || element.parentElement.querySelector('.stat-label').textContent.includes('满意度') ? '%' : element.parentElement.querySelector('.stat-label').textContent.includes('时间') ? 'h' : '+');
-    }
-  }, 16);
 }
-
-const statsObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const number = entry.target.querySelector('.stat-number');
-      if (number && !number.classList.contains('animated')) {
-        number.classList.add('animated');
-        animateCounter(number);
-      }
-      entry.target.classList.add('visible');
-    }
-  });
-}, observerOptions);
-
-document.querySelectorAll('.stat-item').forEach(el => {
-  statsObserver.observe(el);
+}
 });
+},{threshold:.1});
 
-// Smooth Scroll
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
+document.querySelectorAll('.glass-card').forEach(card=>observer.observe(card));
 </script>
-
 </body>
 </html>

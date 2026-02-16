@@ -2,673 +2,427 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>不打烊合伙人 - AI时代的创业机会</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>不打烊合伙人招募 - 月入过万的副业机会</title>
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  background: linear-gradient(180deg, #0a0a1a 0%, #0f0f23 100%);
-  color: #fff;
-  overflow-x: hidden;
-  line-height: 1.6;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-#particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  opacity: 0.4;
-}
-
-section {
-  position: relative;
-  z-index: 1;
-  padding: 100px 0;
-}
-
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 60px 20px;
-}
-
-.hero h1 {
-  font-size: 72px;
-  font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 30px;
-  background: linear-gradient(135deg, #FF2D55 0%, #FF6B8A 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  opacity: 0;
-  animation: fadeInUp 1s ease forwards;
-}
-
-.hero .subtitle {
-  font-size: 24px;
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 50px;
-  opacity: 0;
-  animation: fadeInUp 1s ease 0.3s forwards;
-}
-
-.btn {
-  padding: 18px 40px;
-  font-size: 18px;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
-  font-weight: 600;
-  background: linear-gradient(135deg, #FF2D55 0%, #FF6B8A 100%);
-  color: #fff;
-  border: none;
-  box-shadow: 0 10px 30px rgba(255, 45, 85, 0.3);
-  opacity: 0;
-  animation: fadeInUp 1s ease 0.6s forwards;
-}
-
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 15px 40px rgba(255, 45, 85, 0.5);
-}
-
-.section-title {
-  text-align: center;
-  font-size: 48px;
-  font-weight: 700;
-  margin-bottom: 80px;
-  background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.6) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  margin-top: 60px;
-}
-
-.glass-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  padding: 40px;
-  transition: all 0.4s ease;
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.glass-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.glass-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 60px rgba(255, 45, 85, 0.2);
-  border-color: rgba(255, 45, 85, 0.3);
-}
-
-.glass-card .icon {
-  font-size: 48px;
-  margin-bottom: 20px;
-}
-
-.glass-card h3 {
-  font-size: 24px;
-  margin-bottom: 15px;
-  color: #fff;
-}
-
-.glass-card p {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 16px;
-  line-height: 1.8;
-}
-
-.income-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 30px;
-  margin-top: 60px;
-}
-
-.income-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border: 2px solid rgba(255, 45, 85, 0.3);
-  border-radius: 24px;
-  padding: 40px;
-  text-align: center;
-  transition: all 0.4s ease;
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.income-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.income-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 20px 60px rgba(255, 45, 85, 0.4);
-  border-color: #FF2D55;
-}
-
-.income-card h3 {
-  font-size: 28px;
-  margin-bottom: 20px;
-  color: #FF6B8A;
-}
-
-.income-card .scenario {
-  font-size: 16px;
-  color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 30px;
-}
-
-.income-card .amount {
-  font-size: 48px;
-  font-weight: 800;
-  background: linear-gradient(135deg, #FF2D55 0%, #FF6B8A 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin: 20px 0;
-}
-
-.income-card .year-label {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 10px;
-}
-
-.income-card .arrow {
-  font-size: 32px;
-  color: #FF2D55;
-  margin: 20px 0;
-}
-
-.benefits-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
-  margin-top: 60px;
-}
-
-.benefit-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  padding: 30px;
-  text-align: center;
-  transition: all 0.3s ease;
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.benefit-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.benefit-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(255, 45, 85, 0.3);
-}
-
-.benefit-card h4 {
-  font-size: 20px;
-  color: #FF6B8A;
-  margin-bottom: 10px;
-}
-
-.benefit-card p {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 14px;
-}
-
-.process-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 60px;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.process-step {
-  flex: 1;
-  min-width: 200px;
-  text-align: center;
-  opacity: 0;
-  transform: translateY(30px);
-  position: relative;
-}
-
-.process-step.visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 0.6s ease;
-}
-
-.process-step .step-number {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, #FF2D55 0%, #FF6B8A 100%);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
-  font-weight: 800;
-  margin: 0 auto 20px;
-  box-shadow: 0 10px 30px rgba(255, 45, 85, 0.3);
-}
-
-.process-step h4 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.process-step p {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 14px;
-}
-
-.process-step:not(:last-child)::after {
-  content: '→';
-  position: absolute;
-  right: -30px;
-  top: 35px;
-  font-size: 32px;
-  color: #FF2D55;
-}
-
-.testimonial-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  margin-top: 60px;
-}
-
-.testimonial-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  padding: 30px;
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.testimonial-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 0.6s ease;
-}
-
-.testimonial-card .author {
-  font-weight: 600;
-  color: #FF2D55;
-  margin-bottom: 10px;
-}
-
-.testimonial-card .content {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 16px;
-  line-height: 1.8;
-}
-
-.cta {
-  text-align: center;
-  padding: 100px 20px;
-}
-
-.cta h2 {
-  font-size: 42px;
-  margin-bottom: 40px;
-  background: linear-gradient(135deg, #FF2D55 0%, #FF6B8A 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.qr-code {
-  width: 200px;
-  height: 200px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  margin: 30px auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 14px;
-}
-
-footer {
-  text-align: center;
-  padding: 40px 20px;
-  border-top: 1px solid rgba(255, 45, 85, 0.2);
-  color: rgba(255, 255, 255, 0.5);
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 42px;
-  }
-  
-  .hero .subtitle {
-    font-size: 18px;
-  }
-  
-  .section-title {
-    font-size: 32px;
-  }
-  
-  section {
-    padding: 60px 0;
-  }
-  
-  .income-card .amount {
-    font-size: 36px;
-  }
-  
-  .process-step:not(:last-child)::after {
-    display: none;
-  }
-  
-  .process-container {
-    flex-direction: column;
-  }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#0a0a0f;color:#fff;overflow-x:hidden}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.particles{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+.hero-content{text-align:center;z-index:1;padding:40px 20px}
+.hero h1{font-size:clamp(2.5rem,8vw,5rem);font-weight:700;background:linear-gradient(135deg,#fff 0%,#FF2D55 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:24px;animation:fadeInUp 1s ease}
+.hero p{font-size:clamp(1.2rem,3vw,1.8rem);color:#999;margin-bottom:40px;animation:fadeInUp 1s ease .2s both}
+.hero .highlight{color:#FF2D55;font-weight:700;font-size:2.2rem;display:block;margin:20px 0}
+.cta-btn{display:inline-block;padding:16px 48px;background:linear-gradient(135deg,#FF2D55,#ff6b8a);border-radius:50px;color:#fff;text-decoration:none;font-size:1.2rem;font-weight:600;box-shadow:0 0 30px rgba(255,45,85,.5);transition:all .3s;animation:fadeInUp 1s ease .4s both}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(255,45,85,.8)}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+section{padding:100px 0;position:relative}
+.section-title{text-align:center;font-size:clamp(2rem,5vw,3rem);margin-bottom:60px;background:linear-gradient(135deg,#fff,#FF2D55);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.glass-card{background:rgba(255,255,255,.05);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:40px;transition:all .3s;opacity:0;transform:translateY(30px)}
+.glass-card.visible{opacity:1;transform:translateY(0)}
+.glass-card:hover{transform:translateY(-5px);border-color:rgba(255,45,85,.5);box-shadow:0 10px 40px rgba(255,45,85,.2)}
+.calculator{max-width:800px;margin:0 auto}
+.calc-input{margin-bottom:30px}
+.calc-input label{display:block;margin-bottom:10px;color:#999;font-size:1.1rem}
+.calc-input input{width:100%;padding:15px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2);border-radius:10px;color:#fff;font-size:1.2rem;transition:all .3s}
+.calc-input input:focus{outline:none;border-color:#FF2D55;box-shadow:0 0 20px rgba(255,45,85,.3)}
+.calc-result{text-align:center;padding:40px;background:linear-gradient(135deg,rgba(255,45,85,.2),rgba(255,45,85,.1));border-radius:20px;margin-top:30px}
+.calc-result h3{font-size:1.5rem;margin-bottom:20px;color:#fff}
+.calc-amount{font-size:4rem;font-weight:700;color:#FF2D55;margin:20px 0}
+.calc-breakdown{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:30px}
+.calc-item{padding:20px;background:rgba(255,255,255,.05);border-radius:10px}
+.calc-item .label{color:#999;font-size:.9rem;margin-bottom:5px}
+.calc-item .value{color:#FF2D55;font-size:1.8rem;font-weight:700}
+.benefits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px}
+.benefit-item{text-align:center}
+.benefit-icon{font-size:3.5rem;margin-bottom:20px}
+.benefit-item h3{font-size:1.5rem;margin-bottom:15px;color:#fff}
+.benefit-item p{color:#999;line-height:1.6}
+.tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px}
+.tier-card{position:relative;text-align:center}
+.tier-badge{display:inline-block;padding:8px 24px;background:linear-gradient(135deg,#FF2D55,#ff6b8a);border-radius:20px;font-size:1rem;font-weight:600;margin-bottom:20px}
+.tier-card h3{font-size:2rem;margin-bottom:10px}
+.tier-amount{font-size:2.5rem;color:#FF2D55;margin:20px 0;font-weight:700}
+.tier-features{list-style:none;margin:30px 0;text-align:left}
+.tier-features li{padding:12px 0;color:#999;border-bottom:1px solid rgba(255,255,255,.05);padding-left:30px;position:relative}
+.tier-features li:before{content:"✓";color:#FF2D55;position:absolute;left:0;font-weight:700;font-size:1.2rem}
+.process-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;max-width:1000px;margin:0 auto}
+.process-item{text-align:center;position:relative}
+.process-number{width:60px;height:60px;background:linear-gradient(135deg,#FF2D55,#ff6b8a);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:700;margin:0 auto 20px}
+.process-item h3{font-size:1.3rem;margin-bottom:15px;color:#fff}
+.process-item p{color:#999;line-height:1.6}
+.faq-list{max-width:800px;margin:0 auto}
+.faq-item{margin-bottom:20px}
+.faq-question{padding:20px;background:rgba(255,255,255,.05);border-radius:10px;cursor:pointer;transition:all .3s;border:1px solid rgba(255,255,255,.1)}
+.faq-question:hover{background:rgba(255,255,255,.08);border-color:rgba(255,45,85,.3)}
+.faq-question h3{font-size:1.2rem;color:#fff}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .3s;padding:0 20px;color:#999;line-height:1.8}
+.faq-item.active .faq-answer{max-height:500px;padding:20px}
+.final-cta{text-align:center;padding:80px 20px;background:linear-gradient(135deg,rgba(255,45,85,.1),rgba(255,45,85,.05));border-radius:30px}
+.final-cta h2{font-size:clamp(2rem,5vw,3rem);margin-bottom:20px}
+.final-cta p{font-size:1.2rem;color:#999;margin-bottom:40px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;margin:40px 0}
+.stat-item{text-align:center}
+.stat-number{font-size:3.5rem;font-weight:700;color:#FF2D55}
+.stat-label{color:#999;margin-top:10px;font-size:1.1rem}
+@media(max-width:768px){
+section{padding:60px 0}
+.glass-card{padding:30px}
+.calc-amount{font-size:3rem}
+.tier-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
+<div class="hero">
+<canvas class="particles" id="particles"></canvas>
+<div class="hero-content">
+<h1>成为不打烊合伙人</h1>
+<p>推荐客户即可获得持续分润</p>
+<span class="highlight">推荐1个客户年赚¥1,400-4,260</span>
+<a href="#calculator" class="cta-btn">计算你的收入</a>
+</div>
+</div>
 
-<canvas id="particles"></canvas>
-
-<section class="hero">
-  <div class="container">
-    <h1 id="hero-title"></h1>
-    <p class="subtitle">零库存、零门槛、零风险，推荐客户就能赚钱</p>
-    <a href="#cta" class="btn">立即申请成为合伙人</a>
-  </div>
+<section id="stats">
+<div class="container">
+<div class="stats-grid">
+<div class="stat-item">
+<div class="stat-number counter" data-target="30">0</div>
+<div class="stat-label">首次推荐佣金比例</div>
+</div>
+<div class="stat-item">
+<div class="stat-number counter" data-target="30">0</div>
+<div class="stat-label">续费持续分润比例</div>
+</div>
+<div class="stat-item">
+<div class="stat-number counter" data-target="500">0</div>
+<div class="stat-label">现有合伙人数量</div>
+</div>
+<div class="stat-item">
+<div class="stat-number">¥<span class="counter" data-target="15000">0</span></div>
+<div class="stat-label">月均最高收入</div>
+</div>
+</div>
+</div>
 </section>
 
-<section id="why">
-  <div class="container">
-    <h2 class="section-title">为什么选择不打烊</h2>
-    <div class="card-grid">
-      <div class="glass-card">
-        <div class="icon">💰</div>
-        <h3>高分润</h3>
-        <p>推荐1个客户，每年赚¥1,400-4,260</p>
-      </div>
-      <div class="glass-card">
-        <div class="icon">🔄</div>
-        <h3>持续收入</h3>
-        <p>客户续费你就持续拿钱，睡觉也在赚</p>
-      </div>
-      <div class="glass-card">
-        <div class="icon">🤖</div>
-        <h3>AI帮你干活</h3>
-        <p>客户转化、培训、售后全部AI自动化</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="income">
-  <div class="container">
-    <h2 class="section-title">收入测算</h2>
-    <div class="income-grid">
-      <div class="income-card">
-        <h3>佛系副业</h3>
-        <div class="scenario">年签5个客户</div>
-        <div class="year-label">第1年</div>
-        <div class="amount">¥9,456</div>
-        <div class="arrow">↓</div>
-        <div class="year-label">第2年</div>
-        <div class="amount">¥14,294</div>
-      </div>
-      
-      <div class="income-card">
-        <h3>认真副业</h3>
-        <div class="scenario">年签15个客户</div>
-        <div class="year-label">第1年</div>
-        <div class="amount">¥32,864</div>
-        <div class="arrow">↓</div>
-        <div class="year-label">第2年</div>
-        <div class="amount">¥50,979</div>
-      </div>
-      
-      <div class="income-card">
-        <h3>全职合伙人</h3>
-        <div class="scenario">年签40个客户</div>
-        <div class="year-label">第1年</div>
-        <div class="amount">¥88,700</div>
-        <div class="arrow">↓</div>
-        <div class="year-label">第2年</div>
-        <div class="amount">¥140,540</div>
-      </div>
-    </div>
-  </div>
+<section id="calculator">
+<div class="container">
+<h2 class="section-title">收入测算器</h2>
+<div class="glass-card calculator">
+<div class="calc-input">
+<label>每月推荐客户数量</label>
+<input type="number" id="customers" value="5" min="1" max="100">
+</div>
+<div class="calc-input">
+<label>客户选择版本</label>
+<select id="version" style="width:100%;padding:15px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2);border-radius:10px;color:#fff;font-size:1.2rem">
+<option value="basic">基础版 (¥2,880/年)</option>
+<option value="standard" selected>标准版 (¥5,760/年)</option>
+<option value="pro">专业版 (¥9,600/年)</option>
+</select>
+</div>
+<div class="calc-input">
+<label>预计续费率</label>
+<input type="number" id="renewal" value="80" min="0" max="100">
+<small style="color:#666;display:block;margin-top:5px">行业平均续费率70-85%</small>
+</div>
+<div class="calc-result">
+<h3>预计年收入</h3>
+<div class="calc-amount" id="totalIncome">¥0</div>
+<div class="calc-breakdown">
+<div class="calc-item">
+<div class="label">首年佣金</div>
+<div class="value" id="firstYear">¥0</div>
+</div>
+<div class="calc-item">
+<div class="label">次年续费分润</div>
+<div class="value" id="secondYear">¥0</div>
+</div>
+<div class="calc-item">
+<div class="label">月均收入</div>
+<div class="value" id="monthly">¥0</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 
 <section id="benefits">
-  <div class="container">
-    <h2 class="section-title">合伙人权益</h2>
-    <div class="benefits-grid">
-      <div class="benefit-card">
-        <h4>30%持续分润</h4>
-        <p>客户续费持续获得收益</p>
-      </div>
-      <div class="benefit-card">
-        <h4>AI自动转化客户</h4>
-        <p>智能系统帮你成交</p>
-      </div>
-      <div class="benefit-card">
-        <h4>专属培训+素材包</h4>
-        <p>全套营销工具支持</p>
-      </div>
-      <div class="benefit-card">
-        <h4>推荐合伙人奖励¥500</h4>
-        <p>发展下级也有收益</p>
-      </div>
-    </div>
-  </div>
+<div class="container">
+<h2 class="section-title">合伙人权益</h2>
+<div class="benefits-grid">
+<div class="glass-card">
+<div class="benefit-item">
+<div class="benefit-icon">💰</div>
+<h3>持续分润</h3>
+<p>客户续费持续获得30%分润，躺赚被动收入</p>
+</div>
+</div>
+<div class="glass-card">
+<div class="benefit-item">
+<div class="benefit-icon">🎓</div>
+<h3>专业培训</h3>
+<p>免费提供销售话术、产品培训、营销素材</p>
+</div>
+</div>
+<div class="glass-card">
+<div class="benefit-item">
+<div class="benefit-icon">🛠️</div>
+<h3>技术支持</h3>
+<p>专属客服团队，帮你解决客户所有技术问题</p>
+</div>
+</div>
+<div class="glass-card">
+<div class="benefit-item">
+<div class="benefit-icon">📊</div>
+<h3>数据看板</h3>
+<p>实时查看推荐客户、收入明细、佣金结算</p>
+</div>
+</div>
+<div class="glass-card">
+<div class="benefit-item">
+<div class="benefit-icon">🎁</div>
+<h3>升级奖励</h3>
+<p>达成业绩目标解锁更高分润比例和专属权益</p>
+</div>
+</div>
+<div class="glass-card">
+<div class="benefit-item">
+<div class="benefit-icon">🤝</div>
+<h3>团队支持</h3>
+<p>加入合伙人社群，交流经验，共同成长</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="tiers">
+<div class="container">
+<h2 class="section-title">合伙人等级</h2>
+<div class="tier-grid">
+<div class="glass-card tier-card">
+<div class="tier-badge">🥈 银牌合伙人</div>
+<h3>累计业绩</h3>
+<div class="tier-amount">¥5,000</div>
+<ul class="tier-features">
+<li>30%首次推荐佣金</li>
+<li>30%续费分润</li>
+<li>专属推广素材</li>
+<li>月度培训课程</li>
+<li>客户管理后台</li>
+</ul>
+</div>
+<div class="glass-card tier-card" style="border-color:#FF2D55;box-shadow:0 0 40px rgba(255,45,85,.2)">
+<div class="tier-badge">🥇 金牌合伙人</div>
+<h3>累计业绩</h3>
+<div class="tier-amount">¥20,000</div>
+<ul class="tier-features">
+<li>银牌全部权益</li>
+<li>35%首次推荐佣金</li>
+<li>35%续费分润</li>
+<li>专属客户经理</li>
+<li>优先技术支持</li>
+<li>季度业绩奖金</li>
+</ul>
+</div>
+<div class="glass-card tier-card">
+<div class="tier-badge">💎 钻石合伙人</div>
+<h3>累计业绩</h3>
+<div class="tier-amount">¥50,000</div>
+<ul class="tier-features">
+<li>金牌全部权益</li>
+<li>40%首次推荐佣金</li>
+<li>40%续费分润</li>
+<li>区域独家代理</li>
+<li>定制化解决方案</li>
+<li>年度分红计划</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 
 <section id="process">
-  <div class="container">
-    <h2 class="section-title">加入流程</h2>
-    <div class="process-container">
-      <div class="process-step">
-        <div class="step-number">1</div>
-        <h4>扫码申请</h4>
-        <p>填写基本信息</p>
-      </div>
-      <div class="process-step">
-        <div class="step-number">2</div>
-        <h4>AI面试</h4>
-        <p>10分钟快速审核</p>
-      </div>
-      <div class="process-step">
-        <div class="step-number">3</div>
-        <h4>3天培训</h4>
-        <p>掌握全套技能</p>
-      </div>
-      <div class="process-step">
-        <div class="step-number">4</div>
-        <h4>开始赚钱</h4>
-        <p>立即推广获客</p>
-      </div>
-    </div>
-  </div>
+<div class="container">
+<h2 class="section-title">加入流程</h2>
+<div class="process-grid">
+<div class="glass-card">
+<div class="process-item">
+<div class="process-number">1</div>
+<h3>提交申请</h3>
+<p>填写合伙人申请表，提供基本信息和推广计划</p>
+</div>
+</div>
+<div class="glass-card">
+<div class="process-item">
+<div class="process-number">2</div>
+<h3>审核通过</h3>
+<p>1-3个工作日审核，通过后获得专属推广链接</p>
+</div>
+</div>
+<div class="glass-card">
+<div class="process-item">
+<div class="process-number">3</div>
+<h3>开始推广</h3>
+<p>使用提供的素材和话术，向目标客户推荐产品</p>
+</div>
+</div>
+<div class="glass-card">
+<div class="process-item">
+<div class="process-number">4</div>
+<h3>获得收益</h3>
+<p>客户付费后自动结算佣金，每月15日统一提现</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 
-<section id="testimonials">
-  <div class="container">
-    <h2 class="section-title">合伙人说</h2>
-    <div class="testimonial-grid">
-      <div class="testimonial-card">
-        <div class="author">深圳陈总</div>
-        <div class="content">"做了3个月，签了12个客户，月入¥2,160"</div>
-      </div>
-      <div class="testimonial-card">
-        <div class="author">长沙周姐</div>
-        <div class="content">"全职宝妈，每天2小时，月入¥5,000+"</div>
-      </div>
-      <div class="testimonial-card">
-        <div class="author">南京刘哥</div>
-        <div class="content">"之前做POS机代理，转做不打烊合伙人，客户资源直接复用"</div>
-      </div>
-    </div>
-  </div>
+<section id="faq">
+<div class="container">
+<h2 class="section-title">常见问题</h2>
+<div class="faq-list">
+<div class="glass-card faq-item">
+<div class="faq-question">
+<h3>❓ 需要投入资金吗？</h3>
+</div>
+<div class="faq-answer">
+<p>完全不需要！成为合伙人零门槛，无需任何投入，只需推荐客户即可获得佣金。</p>
+</div>
+</div>
+<div class="glass-card faq-item">
+<div class="faq-question">
+<h3>❓ 佣金什么时候结算？</h3>
+</div>
+<div class="faq-answer">
+<p>客户付费后佣金立即到账，每月15日统一提现到支付宝或银行卡，无手续费。</p>
+</div>
+</div>
+<div class="glass-card faq-item">
+<div class="faq-question">
+<h3>❓ 需要提供售后服务吗？</h3>
+</div>
+<div class="faq-answer">
+<p>不需要！我们有专业的客服和技术团队负责所有售后，你只需专注推广即可。</p>
+</div>
+</div>
+<div class="glass-card faq-item">
+<div class="faq-question">
+<h3>❓ 如何追踪推荐客户？</h3>
+</div>
+<div class="faq-answer">
+<p>每位合伙人都有专属推广链接和后台，可实时查看客户注册、付费、续费等数据。</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 
-<section class="cta" id="cta">
-  <div class="container">
-    <h2>扫码添加企业微信，立即申请</h2>
-    <div class="qr-code">企业微信二维码</div>
-    <p style="color: rgba(255,255,255,0.6); margin-top: 20px;">联系方式：partner@neverclose.ai</p>
-  </div>
+<section>
+<div class="container">
+<div class="glass-card final-cta">
+<h2>立即成为合伙人</h2>
+<p>开启你的副业赚钱之路，月入过万不是梦</p>
+<a href="#" class="cta-btn">申请加入</a>
+</div>
+</div>
 </section>
-
-<footer>
-  <p>不打烊 NeverClose © 2026</p>
-</footer>
 
 <script>
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-const particles = [];
-const particleCount = 80;
-
-for (let i = 0; i < particleCount; i++) {
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    radius: Math.random() * 2 + 1,
-    vx: (Math.random() - 0.5) * 0.5,
-    vy: (Math.random() - 0.5) * 0.5
-  });
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+const particles=[];
+for(let i=0;i<50;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+vx:(Math.random()-.5)*2,
+vy:-Math.random()*2-1,
+size:Math.random()*2+1
+});
 }
-
-function drawParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = 'rgba(255, 45, 85, 0.5)';
-  
-  particles.forEach(p => {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-    ctx.fill();
-    
-    p.x += p.vx;
-    p.y += p.vy;
-    
-    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-  });
-  
-  requestAnimationFrame(drawParticles);
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+particles.forEach(p=>{
+ctx.fillStyle='rgba(255,45,85,'+(Math.random()*.5+.3)+')';
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+ctx.fill();
+p.x+=p.vx;
+p.y+=p.vy;
+if(p.y<0)p.y=canvas.height;
+if(p.x<0||p.x>canvas.width)p.vx*=-1;
+});
+requestAnimationFrame(animate);
 }
-
-drawParticles();
-
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+animate();
+window.addEventListener('resize',()=>{
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
 });
 
-const heroTitle = document.getElementById('hero-title');
-const text = 'AI时代的创业机会\n月入2万不是梦';
-let index = 0;
-
-function typeWriter() {
-  if (index < text.length) {
-    if (text[index] === '\n') {
-      heroTitle.innerHTML += '<br>';
-    } else {
-      heroTitle.textContent += text[index];
-    }
-    index++;
-    setTimeout(typeWriter, 100);
-  }
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add('visible');
+if(entry.target.querySelector('.counter')){
+entry.target.querySelectorAll('.counter').forEach(counter=>{
+const target=+counter.dataset.target;
+let current=0;
+const increment=target/50;
+const timer=setInterval(()=>{
+current+=increment;
+if(current>=target){
+counter.textContent=Math.floor(target);
+clearInterval(timer);
+}else{
+counter.textContent=Math.floor(current);
 }
-
-setTimeout(typeWriter, 500);
-
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, observerOptions);
-
-document.querySelectorAll('.glass-card, .income-card, .benefit-card, .process-step, .testimonial-card').forEach(el => {
-  observer.observe(el);
+},30);
 });
+}
+}
+});
+},{threshold:.1});
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
+document.querySelectorAll('.glass-card').forEach(card=>observer.observe(card));
+document.querySelectorAll('.stat-item').forEach(item=>observer.observe(item));
+
+const prices={basic:2880,standard:5760,pro:9600};
+function updateCalculator(){
+const customers=parseInt(document.getElementById('customers').value)||0;
+const version=document.getElementById('version').value;
+const renewal=parseInt(document.getElementById('renewal').value)||0;
+const yearlyPrice=prices[version];
+const firstYearCommission=customers*yearlyPrice*0.3;
+const secondYearCommission=customers*(renewal/100)*yearlyPrice*0.3;
+const totalIncome=firstYearCommission+secondYearCommission;
+const monthlyIncome=totalIncome/12;
+document.getElementById('firstYear').textContent='¥'+Math.floor(firstYearCommission).toLocaleString();
+document.getElementById('secondYear').textContent='¥'+Math.floor(secondYearCommission).toLocaleString();
+document.getElementById('totalIncome').textContent='¥'+Math.floor(totalIncome).toLocaleString();
+document.getElementById('monthly').textContent='¥'+Math.floor(monthlyIncome).toLocaleString();
+}
+document.getElementById('customers').addEventListener('input',updateCalculator);
+document.getElementById('version').addEventListener('change',updateCalculator);
+document.getElementById('renewal').addEventListener('input',updateCalculator);
+updateCalculator();
+
+document.querySelectorAll('.faq-question').forEach(q=>{
+q.addEventListener('click',()=>{
+const item=q.parentElement;
+const wasActive=item.classList.contains('active');
+document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('active'));
+if(!wasActive)item.classList.add('active');
+});
 });
 </script>
-
 </body>
 </html>
