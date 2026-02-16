@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FarmGeeker合伙人招募 - AI时代的创业机会，月入2万不是梦</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#0a0a1a;color:#fff;overflow-x:hidden;line-height:1.6}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(45deg,#00d4ff,#7c3aed,#00d4ff);background-size:400% 400%;animation:gradientFlow 15s ease infinite;opacity:0.15;z-index:0}
+@keyframes gradientFlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero::after{content:'';position:absolute;width:300px;height:300px;background:radial-gradient(circle,#00ff88 0%,transparent 70%);border-radius:50%;top:20%;left:10%;animation:float 8s ease-in-out infinite;opacity:0.1;z-index:0}
+@keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(50px,50px)}}
+.hero>*{position:relative;z-index:1}
+.logo{font-size:2rem;font-weight:700;color:#00ff88;margin-bottom:2rem;text-shadow:0 0 20px rgba(0,255,136,0.5)}
+.hero h1{font-size:3rem;font-weight:700;margin-bottom:1rem;min-height:4rem}
+.hero h1 .cursor{display:inline-block;width:3px;height:3rem;background:#00ff88;margin-left:5px;animation:blink 1s infinite}
+@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
+.hero .subtitle{font-size:1.2rem;color:#aaa;margin-bottom:3rem;opacity:0;animation:fadeInUp 1s 0.5s forwards}
+@keyframes fadeInUp{to{opacity:1;transform:translateY(0)}from{opacity:0;transform:translateY(20px)}}
+.cta-btn{display:inline-block;padding:18px 50px;background:linear-gradient(135deg,#FF6B35,#ff8f5e);color:#fff;text-decoration:none;border-radius:50px;font-size:1.2rem;font-weight:600;transition:transform 0.3s;animation:pulse 2s infinite;margin-bottom:1rem}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,107,53,0.7)}50%{box-shadow:0 0 0 20px rgba(255,107,53,0)}}
+.cta-btn:hover{transform:scale(1.05)}
+.hero .note{color:#666;font-size:0.9rem}
+section{padding:5rem 0;position:relative}
+.section-title{font-size:2.5rem;text-align:center;margin-bottom:3rem;font-weight:700}
+.fade-in{opacity:0;transform:translateY(30px);transition:opacity 0.6s,transform 0.6s}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+.card{background:rgba(255,255,255,0.05);padding:2rem;border-radius:15px;border:2px solid rgba(255,255,255,0.1);transition:all 0.3s;backdrop-filter:blur(10px)}
+.card:hover{border-color:#00ff88;box-shadow:0 0 30px rgba(0,255,136,0.3);transform:translateY(-5px)}
+.card .emoji{font-size:3rem;display:block;margin-bottom:1rem}
+.card h3{margin-bottom:0.5rem;color:#00d4ff;font-size:1.3rem}
+.card .highlight{color:#00ff88;font-weight:700;font-size:1.2rem}
+.income-calc{max-width:900px;margin:0 auto}
+.calc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-top:2rem}
+.calc-card{background:rgba(255,255,255,0.05);padding:2rem;border-radius:15px;border:2px solid rgba(255,255,255,0.1);text-align:center;backdrop-filter:blur(10px);transition:all 0.3s}
+.calc-card:hover{border-color:#00d4ff;box-shadow:0 0 30px rgba(0,212,255,0.3);transform:scale(1.05)}
+.calc-card h3{color:#00d4ff;font-size:1.5rem;margin-bottom:1rem}
+.calc-card .scenario{color:#aaa;font-size:0.9rem;margin-bottom:1.5rem}
+.calc-card .year{margin-bottom:1rem}
+.calc-card .year-label{color:#888;font-size:0.9rem}
+.calc-card .amount{font-size:2.5rem;font-weight:700;color:#00ff88;display:block}
+.benefits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem}
+.benefit-card{background:rgba(255,255,255,0.05);padding:2rem;border-radius:15px;border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(10px);text-align:center}
+.benefit-card .icon{font-size:2.5rem;margin-bottom:1rem}
+.benefit-card h3{color:#00d4ff;margin-bottom:0.5rem}
+.benefit-card p{color:#ccc;font-size:0.95rem}
+.process{max-width:1000px;margin:0 auto}
+.process-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-top:2rem}
+.step{background:rgba(255,255,255,0.05);padding:2rem;border-radius:15px;border:2px solid rgba(255,255,255,0.1);text-align:center;backdrop-filter:blur(10px);position:relative}
+.step::after{content:'→';position:absolute;right:-2rem;top:50%;transform:translateY(-50%);font-size:2rem;color:#00ff88}
+.step:last-child::after{display:none}
+.step .num{width:50px;height:50px;background:linear-gradient(135deg,#00d4ff,#7c3aed);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:700;margin:0 auto 1rem}
+.step h3{color:#00d4ff;margin-bottom:0.5rem}
+.testimonials{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+.testimonial-card{background:rgba(255,255,255,0.05);padding:2rem;border-radius:15px;border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(10px)}
+.testimonial-card .quote{font-size:1.1rem;line-height:1.8;margin-bottom:1rem;color:#ccc}
+.testimonial-card .author{color:#00d4ff;font-weight:600}
+.testimonial-card .result{color:#00ff88;font-weight:700;margin-top:0.5rem}
+.final-cta{background:linear-gradient(135deg,rgba(0,212,255,0.1),rgba(124,58,237,0.1));text-align:center;padding:5rem 2rem}
+.final-cta h2{font-size:2.5rem;margin-bottom:1rem}
+.final-cta p{font-size:1.3rem;color:#aaa;margin-bottom:2rem}
+.qr-placeholder{width:200px;height:200px;margin:2rem auto;background:rgba(255,255,255,0.1);border:2px dashed rgba(255,255,255,0.3);border-radius:15px;display:flex;align-items:center;justify-content:center;color:#666}
+footer{text-align:center;padding:2rem;color:#666;border-top:1px solid rgba(255,255,255,0.1)}
+@media(max-width:768px){
+.hero h1{font-size:2rem}
+.hero h1 .cursor{height:2rem}
+.hero .subtitle{font-size:1rem}
+.section-title{font-size:2rem}
+.calc-grid,.testimonials{grid-template-columns:1fr}
+.process-steps{grid-template-columns:1fr}
+.step::after{display:none}
+.final-cta h2{font-size:2rem}
+.final-cta p{font-size:1.1rem}
+}
+</style>
+</head>
+<body>
+<section class="hero">
+<div class="logo">FarmGeeker</div>
+<h1 id="typewriter"></h1>
+<p class="subtitle">零库存、零门槛、零风险，推荐客户就能赚钱</p>
+<a href="#apply" class="cta-btn">立即申请成为合伙人</a>
+<p class="note">已有500+合伙人月入过万</p>
+</section>
+
+<section id="why">
+<div class="container">
+<h2 class="section-title fade-in">为什么选择FarmGeeker</h2>
+<div class="why-grid">
+<div class="card fade-in">
+<span class="emoji">💰</span>
+<h3>高分润</h3>
+<p>推荐1个客户，每年赚<span class="highlight">¥1,400-4,260</span></p>
+<p style="color:#aaa;margin-top:0.5rem;font-size:0.9rem">基础版30%分润，标准版35%，专业版40%</p>
+</div>
+<div class="card fade-in">
+<span class="emoji">🔄</span>
+<h3>持续收入</h3>
+<p>客户续费你就持续拿钱，<span class="highlight">睡觉也在赚</span></p>
+<p style="color:#aaa;margin-top:0.5rem;font-size:0.9rem">第2年续费分润更高，最高可达50%</p>
+</div>
+<div class="card fade-in">
+<span class="emoji">🤖</span>
+<h3>AI帮你干活</h3>
+<p>客户转化、培训、售后<span class="highlight">全部AI自动化</span></p>
+<p style="color:#aaa;margin-top:0.5rem;font-size:0.9rem">你只需要推荐客户，其他交给我们</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="income">
+<div class="container">
+<h2 class="section-title fade-in">收入测算：看看你能赚多少</h2>
+<div class="income-calc fade-in">
+<div class="calc-grid">
+<div class="calc-card">
+<h3>佛系副业</h3>
+<p class="scenario">年签5个客户</p>
+<div class="year">
+<p class="year-label">第1年收入</p>
+<span class="amount">¥9,456</span>
+</div>
+<div class="year">
+<p class="year-label">第2年收入</p>
+<span class="amount">¥14,294</span>
+</div>
+</div>
+<div class="calc-card">
+<h3>认真副业</h3>
+<p class="scenario">年签15个客户</p>
+<div class="year">
+<p class="year-label">第1年收入</p>
+<span class="amount">¥32,864</span>
+</div>
+<div class="year">
+<p class="year-label">第2年收入</p>
+<span class="amount">¥50,979</span>
+</div>
+</div>
+<div class="calc-card">
+<h3>全职合伙人</h3>
+<p class="scenario">年签40个客户</p>
+<div class="year">
+<p class="year-label">第1年收入</p>
+<span class="amount">¥88,700</span>
+</div>
+<div class="year">
+<p class="year-label">第2年收入</p>
+<span class="amount">¥140,540</span>
+</div>
+</div>
+</div>
+<p style="text-align:center;margin-top:2rem;color:#00ff88;font-weight:600">💡 客户续费率85%+，第2年躺赚更多</p>
+</div>
+</div>
+</section>
+
+<section id="benefits">
+<div class="container">
+<h2 class="section-title fade-in">合伙人权益</h2>
+<div class="benefits-grid">
+<div class="benefit-card fade-in">
+<div class="icon">💵</div>
+<h3>30%持续分润</h3>
+<p>客户续费你就持续赚，第2年分润更高</p>
+</div>
+<div class="benefit-card fade-in">
+<div class="icon">🤖</div>
+<h3>AI自动转化</h3>
+<p>AI帮你跟进客户，自动发送案例和报价</p>
+</div>
+<div class="benefit-card fade-in">
+<div class="icon">📚</div>
+<h3>专属培训</h3>
+<p>3天培训+营销素材包，小白也能上手</p>
+</div>
+<div class="benefit-card fade-in">
+<div class="icon">🎁</div>
+<h3>推荐奖励</h3>
+<p>推荐合伙人额外奖励¥500/人</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="process">
+<div class="container">
+<h2 class="section-title fade-in">加入流程</h2>
+<div class="process fade-in">
+<div class="process-steps">
+<div class="step">
+<div class="num">1</div>
+<h3>扫码申请</h3>
+<p style="color:#aaa;font-size:0.9rem">填写简单信息</p>
+</div>
+<div class="step">
+<div class="num">2</div>
+<h3>AI面试</h3>
+<p style="color:#aaa;font-size:0.9rem">10分钟线上沟通</p>
+</div>
+<div class="step">
+<div class="num">3</div>
+<h3>3天培训</h3>
+<p style="color:#aaa;font-size:0.9rem">学会推广技巧</p>
+</div>
+<div class="step">
+<div class="num">4</div>
+<h3>开始赚钱</h3>
+<p style="color:#aaa;font-size:0.9rem">推荐客户拿分润</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="testimonials">
+<div class="container">
+<h2 class="section-title fade-in">合伙人真实反馈</h2>
+<div class="testimonials">
+<div class="testimonial-card fade-in">
+<p class="quote">"做了3个月，签了12个客户，月入¥2,160，比我之前做微商强多了"</p>
+<p class="author">深圳陈总</p>
+<p class="result">💰 3个月收入¥6,480</p>
+</div>
+<div class="testimonial-card fade-in">
+<p class="quote">"全职宝妈，每天2小时推推朋友圈，月入¥5,000+"</p>
+<p class="author">长沙周姐</p>
+<p class="result">⏰ 时间自由，在家就能赚</p>
+</div>
+<div class="testimonial-card fade-in">
+<p class="quote">"之前做POS机代理，转做FarmGeeker合伙人，客户资源直接复用"</p>
+<p class="author">南京刘哥</p>
+<p class="result">🔄 老客户转化率超60%</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="apply" class="final-cta">
+<div class="container">
+<h2>扫码添加企业微信，申请成为合伙人</h2>
+<p>名额有限，先到先得</p>
+<div class="qr-placeholder">企业微信二维码<br>（待替换）</div>
+<p style="color:#00ff88;font-weight:600;margin-top:2rem">💬 有问题？添加企业微信咨询</p>
+</div>
+</section>
+
+<footer>
+<p>FarmGeeker © 2026 · 联系方式：微信 FarmGeeker · 电话 400-888-8888</p>
+</footer>
+
+<script>
+const typewriter=document.getElementById('typewriter');
+const text='AI时代的创业机会，月入2万不是梦';
+let i=0;
+function type(){
+if(i<text.length){
+typewriter.innerHTML=text.substring(0,i+1)+'<span class="cursor"></span>';
+i++;
+setTimeout(type,150);
+}else{
+typewriter.innerHTML=text+'<span class="cursor"></span>';
+}
+}
+setTimeout(type,500);
+
+const observer=new IntersectionObserver((entries)=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add('visible');
+}
+});
+},{threshold:0.1});
+
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
