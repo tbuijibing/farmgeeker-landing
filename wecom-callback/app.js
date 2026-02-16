@@ -66,47 +66,57 @@ function saveChat(userId, messages) {
 
 // === 构建 System Prompt（带客户档案）===
 function buildSystemPrompt(customer) {
-  let prompt = '你是小不，一个水果店的AI店员。你记得每个老顾客，像真正的店员一样热情但不过分。\n\n';
+  let prompt = '你是小不，"不打烊NeverClose"公司的AI商务顾问。\n';
+  prompt += '"不打烊"是一家做AI智能助手的科技公司，帮生鲜店、水果店等小商户实现24小时自动回复、智能营销、客户管理。\n\n';
+  prompt += '你面对的人有两类：\n';
+  prompt += '1. 生鲜店/水果店老板 — 来咨询产品的潜在客户\n';
+  prompt += '2. 想做城市合伙人的人 — 来了解代理加盟的\n\n';
   prompt += '说话风格：\n';
-  prompt += '- 像街坊邻居聊天，自然随意\n';
-  prompt += '- 简短回复，3-5句话，别写小作文\n';
-  prompt += '- 偶尔用emoji，别轰炸\n';
-  prompt += '- 记住客户说过的话，下次聊天时自然提起\n\n';
+  prompt += '- 像朋友聊天，自然随意，不要客服腔\n';
+  prompt += '- 简短回复，3-5句话\n';
+  prompt += '- 懂行，能聊生鲜行业的痛点和解决方案\n';
+  prompt += '- 不急着推销，先了解对方需求\n\n';
 
-  prompt += '你的核心能力：\n';
-  prompt += '1. 记住客户喜好（爱吃什么水果、口味偏好、家里几口人）\n';
-  prompt += '2. 根据季节和库存主动推荐（比如"草莓季到了，上次你买的那种又有了"）\n';
-  prompt += '3. 帮客户下单、查价格、推荐搭配\n';
-  prompt += '4. 记住特殊日期（生日、纪念日）提前提醒送果篮\n\n';
+  prompt += '产品信息：\n';
+  prompt += '- 不打烊AI助手：帮小商户24小时自动回复客户、智能营销、数据分析\n';
+  prompt += '- 基础版：初装¥800+年费¥2,880（月均¥240）— AI自动回复+基础报表\n';
+  prompt += '- 标准版：初装¥1,200+年费¥5,760（月均¥480）— +智能营销+客户画像 推荐\n';
+  prompt += '- 专业版：初装¥1,800+年费¥9,600（月均¥800）— +多店管理+供应链\n';
+  prompt += '- 免费试用7天，不满意退款\n';
+  prompt += '- 官网：ai.frulia.top\n\n';
 
-  if (customer.name || customer.preferences.length > 0 || customer.purchaseHistory.length > 0) {
-    prompt += '=== 这位客户的档案 ===\n';
+  prompt += '合伙人计划：\n';
+  prompt += '- 推荐1个客户年赚¥1,400-4,260（看版本）\n';
+  prompt += '- 客户续费持续分润30%\n';
+  prompt += '- 银牌¥5,000保证金 → 金牌¥2万(区域独家) → 钻石¥5万(地级市独家)\n';
+  prompt += '- 4个月回本，认真做6个月月入过万\n';
+  prompt += '- 详情：ai.frulia.top/partner.html\n\n';
+
+  prompt += '成功案例（可以提但别编新的）：\n';
+  prompt += '- 杭州王老板(水果店)：漏单率从30%降到5%\n';
+  prompt += '- 成都李姐(生鲜超市)：AI写朋友圈，营业额+35%\n';
+  prompt += '- 武汉张哥(社区菜店)：每天省2小时回消息\n\n';
+
+  if (customer.name || customer.tags.length > 0 || customer.notes) {
+    prompt += '=== 这位咨询者的档案 ===\n';
     if (customer.name) prompt += '称呼：' + customer.name + '\n';
-    if (customer.address) prompt += '地址：' + customer.address + '\n';
-    if (customer.preferences.length) prompt += '喜好：' + customer.preferences.join('、') + '\n';
-    if (customer.dislike.length) prompt += '不喜欢：' + customer.dislike.join('、') + '\n';
-    if (customer.frequentItems.length) prompt += '常买：' + customer.frequentItems.join('、') + '\n';
-    if (customer.purchaseHistory.length) {
-      prompt += '最近购买：\n';
-      customer.purchaseHistory.slice(-5).forEach(p => {
-        prompt += '  - ' + p.date + ': ' + p.items + (p.amount ? ' ¥' + p.amount : '') + '\n';
-      });
-    }
+    if (customer.shopName) prompt += '店铺：' + customer.shopName + '\n';
+    if (customer.shopType) prompt += '行业：' + customer.shopType + '\n';
+    if (customer.address) prompt += '地区：' + customer.address + '\n';
+    if (customer.preferences.length) prompt += '关注点：' + customer.preferences.join('、') + '\n';
     if (customer.tags.length) prompt += '标签：' + customer.tags.join('、') + '\n';
     if (customer.notes) prompt += '备注：' + customer.notes + '\n';
     prompt += '联系次数：' + customer.contactCount + '次\n';
     prompt += '首次联系：' + customer.firstContact.slice(0, 10) + '\n';
     prompt += '========================\n\n';
-    prompt += '利用这些信息自然地聊天，比如"上次你买的XX怎么样"，但别一上来就背档案。\n';
+    prompt += '利用这些信息自然地聊天，但别一上来就背档案。\n';
   } else {
-    prompt += '这是新客户，还不了解ta。自然地聊天，顺便了解ta的需求。\n';
+    prompt += '这是新的咨询者，还不了解ta。先了解对方是开店的还是想做合伙人。\n';
   }
 
-  prompt += '\n重要：每次对话后，你需要在回复最后用一个隐藏标记更新客户信息。\n';
-  prompt += '格式：在回复正文之后，另起一行写 [UPDATE] 然后跟JSON，例如：\n';
-  prompt += '[UPDATE]{"name":"张姐","preferences":["草莓","车厘子"],"frequentItems":["草莓"],"tags":["价格敏感","住附近"],"notes":"家里有小孩，喜欢甜的"}\n';
-  prompt += '只在获取到新信息时才加[UPDATE]，没有新信息就不加。\n';
-  prompt += 'JSON里只写需要更新的字段，不用写全部。preferences和frequentItems是追加不是覆盖。';
+  prompt += '\n每次对话后，如果获取到新信息，在回复最后另起一行写：\n';
+  prompt += '[UPDATE]{"name":"张老板","shopName":"鲜果坊","shopType":"水果店","address":"杭州","tags":["潜在客户","对标准版感兴趣"],"notes":"3家连锁店，月营业额10万"}\n';
+  prompt += '只在有新信息时才加[UPDATE]，没有就不加。tags可选：潜在客户、意向客户、合伙人意向、价格敏感、决策者、已试用等。';
 
   return prompt;
 }
@@ -254,19 +264,19 @@ async function getAIReply(userMsg, userId) {
 // === 降级回复 ===
 function getFallbackReply(msg) {
   const m = msg.trim().toLowerCase();
-  if (m.includes('草莓')) return '草莓现在正当季呢，丹东99红颜特别甜！要不要来点？';
-  if (m.includes('价格') || m.includes('多少钱')) return '你想问哪个水果的价格？告诉我，我帮你查~';
-  if (m.includes('送货') || m.includes('配送')) return '3公里内免费送，一般30分钟到。你的地址发我？';
-  return '你好呀！我是小不，有什么需要帮忙的吗？';
+  if (m.includes('价格') || m.includes('多少钱') || m.includes('收费')) return '基础版月均240，标准版月均480（推荐），专业版月均800。免费试用7天，详情看 ai.frulia.top';
+  if (m.includes('合伙人') || m.includes('代理') || m.includes('加盟')) return '合伙人推荐1个客户年赚1400-4260，续费持续分润。详情：ai.frulia.top/partner.html';
+  if (m.includes('试用') || m.includes('体验')) return '可以免费试用7天！告诉我你的店铺名称和主营品类，我帮你安排~';
+  return '你好！我是不打烊AI助手的商务顾问小不，你是想了解产品还是合伙人计划？';
 }
 
-// === 主动营销引擎 ===
+// === 主动跟进引擎 ===
 function checkProactiveMessages() {
   if (!fs.existsSync(CUSTOMERS_DIR)) return;
   const files = fs.readdirSync(CUSTOMERS_DIR).filter(f => f.endsWith('.json'));
   const now = new Date();
   const hour = now.getHours();
-  if (hour < 8 || hour > 21) return;
+  if (hour < 9 || hour > 20) return;
 
   files.forEach(file => {
     try {
@@ -274,13 +284,23 @@ function checkProactiveMessages() {
       if (!customer.proactiveOk) return;
       const lastContact = new Date(customer.lastContact);
       const daysSince = (now - lastContact) / (1000 * 60 * 60 * 24);
+      const name = customer.name || '';
 
-      if (daysSince >= 7 && daysSince < 8 && customer.frequentItems.length > 0) {
-        const item = customer.frequentItems[Math.floor(Math.random() * customer.frequentItems.length)];
-        const name = customer.name || '亲';
-        const msg = name + '，好久没来啦！你上次买的' + item + '又到新货了，要不要来点？';
+      // 3天没回来的意向客户，温和跟进
+      if (daysSince >= 3 && daysSince < 4 && customer.tags.includes('意向客户')) {
+        const msg = (name ? name + '，' : '') + '上次聊到的AI助手方案，你考虑得怎么样了？有什么顾虑可以随时问我~';
         sendMessage(customer.id, msg).then(() => {
-          console.log('[Proactive] sent to', customer.name || customer.id);
+          console.log('[Follow-up] 3day sent to', name || customer.id);
+          customer.lastContact = now.toISOString();
+          fs.writeFileSync(path.join(CUSTOMERS_DIR, file), JSON.stringify(customer, null, 2));
+        });
+      }
+
+      // 7天没回来的潜在客户，分享案例
+      if (daysSince >= 7 && daysSince < 8 && customer.tags.includes('潜在客户')) {
+        const msg = (name ? name + '，' : '老板，') + '最近有个水果店老板用了我们的AI助手，一个月多赚了8000多，要不要了解下？';
+        sendMessage(customer.id, msg).then(() => {
+          console.log('[Follow-up] 7day sent to', name || customer.id);
           customer.lastContact = now.toISOString();
           fs.writeFileSync(path.join(CUSTOMERS_DIR, file), JSON.stringify(customer, null, 2));
         });
