@@ -69,35 +69,35 @@ section{padding:60px 0}
 <div class="hero">
 <canvas class="particles" id="particles"></canvas>
 <div class="hero-content">
-<h1>一天漏10单，一年丢18万</h1>
-<p>不打烊AI助手 · 24小时自动回复 · 再也不漏单</p>
+<h1>你的店不打烊</h1>
+<p>AI智能客服，24小时自动接单回复</p>
 <a href="#pricing" class="cta-btn">免费试用7天</a>
 </div>
 </div>
 
 <section id="pain">
 <div class="container">
-<h2 class="section-title">你每天在流失多少钱？</h2>
+<h2 class="section-title">生鲜店老板的痛点</h2>
 <div class="pain-grid">
 <div class="glass-card">
 <div class="pain-item">
-<div class="pain-icon">💸</div>
-<h3>漏单 = 丢钱</h3>
-<p>晚上关店后客户问货，第二天忘了回，一单50块就这么没了。一天漏10单，一个月1.5万，一年18万。</p>
+<div class="pain-icon">😴</div>
+<h3>深夜无人接单</h3>
+<p>凌晨订单无人回复，客户流失到竞争对手</p>
 </div>
 </div>
 <div class="glass-card">
 <div class="pain-item">
-<div class="pain-icon">⏰</div>
-<h3>回复慢 = 客户跑</h3>
-<p>客户问"有榴莲吗"，你忙着称重没看手机，10分钟后他已经在隔壁店下单了。</p>
+<div class="pain-icon">🏃</div>
+<h3>忙时顾此失彼</h3>
+<p>高峰期忙不过来，微信消息回复不及时</p>
 </div>
 </div>
 <div class="glass-card">
 <div class="pain-item">
-<div class="pain-icon">😫</div>
-<h3>重复问题烦死人</h3>
-<p>"今天有什么水果""怎么配送""能不能便宜点"，每天回答100遍，累死还不赚钱。</p>
+<div class="pain-icon">📱</div>
+<h3>重复问题太多</h3>
+<p>每天回答相同问题，浪费大量时间精力</p>
 </div>
 </div>
 </div>
@@ -106,30 +106,24 @@ section{padding:60px 0}
 
 <section id="solution">
 <div class="container">
-<h2 class="section-title">不打烊AI助手 = 24小时不下班的店员</h2>
+<h2 class="section-title">不打烊AI解决方案</h2>
 <div class="solution-grid">
 <div class="glass-card">
 <div class="solution-item">
-<h3>🤖 秒回客户，不漏一单</h3>
-<p>客户问"有车厘子吗"，AI立刻回"有的老板，智利进口，现在特价88/斤，要几斤？"<br><br>凌晨3点有人问，也能秒回。再也不漏单。</p>
+<h3>🤖 24小时智能客服</h3>
+<p>AI自动回复客户咨询，深夜凌晨也不错过订单，接单率提升<span class="counter" data-target="80">0</span>%</p>
 </div>
 </div>
 <div class="glass-card">
 <div class="solution-item">
-<h3>💡 智能推荐，客单价+20%</h3>
-<p>客户买苹果，AI自动推荐："老板，苹果配橙子一起吃更健康，橙子今天特价要不要来点？"<br><br>杭州王老板用了AI，客单价从50涨到60。</p>
+<h3>⚡ 秒级响应速度</h3>
+<p>客户消息1秒内自动回复，高峰期也能应对自如，客户满意度提升<span class="counter" data-target="95">0</span>%</p>
 </div>
 </div>
 <div class="glass-card">
 <div class="solution-item">
-<h3>📝 AI写文案，省2小时</h3>
-<p>每天发朋友圈愁死人？AI帮你写："今日特价🔥泰国金枕榴莲88/斤，奶香浓郁，限量20个！"<br><br>3秒生成，配图配文案，直接发。</p>
-</div>
-</div>
-<div class="glass-card">
-<div class="solution-item">
-<h3>📊 客户分析，知道谁该催</h3>
-<p>谁是大客户？谁一周没来了？谁该催单？AI全知道。<br><br>成都李姐用AI分析客户，复购率从30%涨到50%。</p>
+<h3>🎯 智能推荐商品</h3>
+<p>根据客户需求推荐合适商品，自动发送图片价格，转化率提升<span class="counter" data-target="60">0</span>%</p>
 </div>
 </div>
 </div>
@@ -160,7 +154,7 @@ section{padding:60px 0}
 
 <section id="pricing">
 <div class="container">
-<h2 class="section-title">一天16块，省下的时间多卖几单就回本</h2>
+<h2 class="section-title">选择适合你的方案</h2>
 <div class="pricing-grid">
 <div class="glass-card price-card">
 <h3>基础版</h3>

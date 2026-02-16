@@ -78,9 +78,9 @@ section{padding:60px 0}
 <div class="hero">
 <canvas class="particles" id="particles"></canvas>
 <div class="hero-content">
-<h1>月推5个客户，年入15.6万</h1>
-<p>初装费50% + 首年35% + 续费30%，客户用得越久你赚得越多</p>
-<span class="highlight">全国150万家生鲜店，90%还在手工回复</span>
+<h1>成为不打烊合伙人</h1>
+<p>推荐客户即可获得持续分润</p>
+<span class="highlight">推荐1个客户年赚¥1,400-4,260</span>
 <a href="#calculator" class="cta-btn">计算你的收入</a>
 </div>
 </div>
@@ -89,20 +89,20 @@ section{padding:60px 0}
 <div class="container">
 <div class="stats-grid">
 <div class="stat-item">
-<div class="stat-number counter" data-target="50">0</div>
-<div class="stat-label">初装费分润比例</div>
+<div class="stat-number counter" data-target="30">0</div>
+<div class="stat-label">首次推荐佣金比例</div>
 </div>
 <div class="stat-item">
 <div class="stat-number counter" data-target="30">0</div>
 <div class="stat-label">续费持续分润比例</div>
 </div>
 <div class="stat-item">
-<div class="stat-number counter" data-target="328">0</div>
+<div class="stat-number counter" data-target="500">0</div>
 <div class="stat-label">现有合伙人数量</div>
 </div>
 <div class="stat-item">
-<div class="stat-number">¥<span class="counter" data-target="156000">0</span></div>
-<div class="stat-label">月推5个年收入</div>
+<div class="stat-number">¥<span class="counter" data-target="15000">0</span></div>
+<div class="stat-label">月均最高收入</div>
 </div>
 </div>
 </div>
