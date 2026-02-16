@@ -13,9 +13,10 @@ const TOKEN = 'FGK2026NeverClose';
 const ENCODING_AES_KEY = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG';
 
 // === AI 配置 ===
-const AI_BASE_URL = 'open.bigmodel.cn';
-const AI_API_KEY = 'f598b9b87432467eb0fa726f0783498a.Wud0KykFE02JKBVK';
-const AI_MODEL = 'glm-5';
+const AI_BASE_URL = 'api.php.kim';
+const AI_API_KEY = 'sk-c99f239d5adc86cb284631b0938bfc9d68c8f6fd4083804686e9e1450041db20';
+const AI_MODEL = 'claude-sonnet-4-5';
+const AI_API_TYPE = 'anthropic'; // 'anthropic' or 'zhipu'
 
 // === 数据目录 ===
 const DATA_DIR = path.join(__dirname, 'data');
@@ -326,25 +327,49 @@ async function getAIReply(userMsg, userId) {
   const recentMessages = chatMessages.slice(-20);
 
   try {
-    const data = await httpPost('https://' + AI_BASE_URL + '/api/paas/v4/chat/completions', {
-      model: AI_MODEL,
-      max_tokens: 600,
-      messages: [{ role: 'system', content: systemPrompt }, ...recentMessages]
-    }, {
-      'Authorization': 'Bearer ' + AI_API_KEY
-    });
-
-    if (data.choices && data.choices[0] && data.choices[0].message) {
-      const rawReply = data.choices[0].message.content;
-      const reply = parseAIResponse(rawReply, customer);
-      chatMessages.push({ role: 'assistant', content: reply });
-      saveChat(userId, chatMessages);
-      saveCustomer(userId, customer);
-      return reply;
+    let data;
+    if (AI_API_TYPE === 'anthropic') {
+      // Anthropic API
+      data = await httpPost('https://' + AI_BASE_URL + '/v1/messages', {
+        model: AI_MODEL,
+        max_tokens: 600,
+        system: systemPrompt,
+        messages: recentMessages
+      }, {
+        'x-api-key': AI_API_KEY,
+        'anthropic-version': '2023-06-01'
+      });
+      
+      if (data.content && data.content[0] && data.content[0].text) {
+        const rawReply = data.content[0].text;
+        const reply = parseAIResponse(rawReply, customer);
+        chatMessages.push({ role: 'assistant', content: reply });
+        saveChat(userId, chatMessages);
+        saveCustomer(userId, customer);
+        return reply;
+      }
     } else {
-      console.error('[AI] unexpected:', JSON.stringify(data).slice(0, 200));
-      return getFallbackReply(userMsg);
+      // 智谱 API
+      data = await httpPost('https://' + AI_BASE_URL + '/api/paas/v4/chat/completions', {
+        model: AI_MODEL,
+        max_tokens: 600,
+        messages: [{ role: 'system', content: systemPrompt }, ...recentMessages]
+      }, {
+        'Authorization': 'Bearer ' + AI_API_KEY
+      });
+      
+      if (data.choices && data.choices[0] && data.choices[0].message) {
+        const rawReply = data.choices[0].message.content;
+        const reply = parseAIResponse(rawReply, customer);
+        chatMessages.push({ role: 'assistant', content: reply });
+        saveChat(userId, chatMessages);
+        saveCustomer(userId, customer);
+        return reply;
+      }
     }
+    
+    console.error('[AI] unexpected:', JSON.stringify(data).slice(0, 200));
+    return getFallbackReply(userMsg);
   } catch (e) {
     console.error('[AI] error:', e.message);
     return getFallbackReply(userMsg);
