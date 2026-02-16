@@ -399,18 +399,19 @@ counter.textContent=Math.floor(current);
 document.querySelectorAll('.glass-card').forEach(card=>observer.observe(card));
 document.querySelectorAll('.stat-item').forEach(item=>observer.observe(item));
 
-const prices={basic:2880,standard:5760,pro:9600};
+const prices={basic:{setup:800,yearly:2880},standard:{setup:1200,yearly:5760},pro:{setup:1800,yearly:9600}};
 function updateCalculator(){
 const customers=parseInt(document.getElementById('customers').value)||0;
 const version=document.getElementById('version').value;
 const renewal=parseInt(document.getElementById('renewal').value)||0;
-const yearlyPrice=prices[version];
-const firstYearCommission=customers*yearlyPrice*0.3;
-const secondYearCommission=customers*(renewal/100)*yearlyPrice*0.3;
-const totalIncome=firstYearCommission+secondYearCommission;
+const p=prices[version];
+const setupCommission=customers*p.setup*0.5;
+const firstYearFee=customers*p.yearly*0.35;
+const renewalFee=customers*(renewal/100)*p.yearly*0.3;
+const totalIncome=setupCommission+firstYearFee+renewalFee;
 const monthlyIncome=totalIncome/12;
-document.getElementById('firstYear').textContent='¥'+Math.floor(firstYearCommission).toLocaleString();
-document.getElementById('secondYear').textContent='¥'+Math.floor(secondYearCommission).toLocaleString();
+document.getElementById('firstYear').textContent='¥'+Math.floor(setupCommission+firstYearFee).toLocaleString();
+document.getElementById('secondYear').textContent='¥'+Math.floor(renewalFee).toLocaleString();
 document.getElementById('totalIncome').textContent='¥'+Math.floor(totalIncome).toLocaleString();
 document.getElementById('monthly').textContent='¥'+Math.floor(monthlyIncome).toLocaleString();
 }

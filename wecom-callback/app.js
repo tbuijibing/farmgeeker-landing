@@ -38,6 +38,7 @@ function loadCustomer(userId) {
     preferences: [], dislike: [],
     purchaseHistory: [], frequentItems: [],
     tags: [], notes: '',
+    source: '', referrer: '',
     firstContact: new Date().toISOString(),
     lastContact: new Date().toISOString(),
     contactCount: 0, sentiment: 'neutral',
@@ -86,8 +87,10 @@ function buildSystemPrompt(customer) {
   prompt += '- 官网：ai.frulia.top\n\n';
 
   prompt += '合伙人计划：\n';
-  prompt += '- 推荐1个客户年赚¥1,400-4,260（看版本）\n';
-  prompt += '- 客户续费持续分润30%\n';
+  prompt += '- 分润：初装费50% + 首年年费35% + 续费年费30%\n';
+  prompt += '- 举例：推荐1个标准版客户，初装费赚600+首年年费赚2016=首年赚¥2,616\n';
+  prompt += '- 每月推荐5个标准版，年收入¥15万+（初装费3.6万+年费12万）\n';
+  prompt += '- 客户续费你持续拿30%，躺赚\n';
   prompt += '- 银牌¥5,000保证金 → 金牌¥2万(区域独家) → 钻石¥5万(地级市独家)\n';
   prompt += '- 4个月回本，认真做6个月月入过万\n';
   prompt += '- 详情：ai.frulia.top/partner.html\n\n';
@@ -326,13 +329,19 @@ function parseXML(xml) {
 }
 
 // === 欢迎消息 ===
-async function sendWelcome(userId, source) {
+async function sendWelcome(userId, source, eventKey) {
   const customer = loadCustomer(userId);
+  if (eventKey) {
+    customer.source = eventKey;
+    const parts = eventKey.split('_');
+    if (parts.length > 1) customer.referrer = parts.slice(1).join('_');
+    else customer.referrer = eventKey;
+  }
   let msg;
   if (source === 'partner') {
     msg = '你好！欢迎了解"不打烊"城市合伙人计划 🤝\n\n';
-    msg += '推荐1个客户年赚¥1,400-4,260，续费持续分润30%。\n';
-    msg += '认真做6个月月入过万，不是梦。\n\n';
+    msg += '推荐1个标准版客户首年赚¥2,616，续费持续分润30%。\n';
+    msg += '每月推荐5个客户，年收入15万+。\n\n';
     msg += '你可以直接问我任何问题，比如：\n';
     msg += '• 怎么赚钱？\n• 需要投入多少？\n• 怎么推广？';
     customer.tags = [...new Set([...customer.tags, '合伙人意向'])];
@@ -346,7 +355,7 @@ async function sendWelcome(userId, source) {
   }
   saveCustomer(userId, customer);
   await sendMessage(userId, msg);
-  console.log('[Welcome] sent to', userId, 'source:', source);
+  console.log('[Welcome] sent to', userId, 'source:', source, 'ref:', customer.referrer || 'direct');
 }
 
 // === HTTP 服务器 ===
@@ -368,6 +377,25 @@ const server = http.createServer(async (req, res) => {
     }).filter(Boolean);
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(customers, null, 2));
+    return;
+  }
+
+  // 渠道统计 API
+  if (url.pathname === '/api/channels' && req.method === 'GET') {
+    const files = fs.existsSync(CUSTOMERS_DIR) ? fs.readdirSync(CUSTOMERS_DIR).filter(f => f.endsWith('.json')) : [];
+    const stats = {};
+    files.forEach(f => {
+      try {
+        const c = JSON.parse(fs.readFileSync(path.join(CUSTOMERS_DIR, f), 'utf8'));
+        const ref = c.referrer || c.source || 'direct';
+        if (!stats[ref]) stats[ref] = { count: 0, tags: {}, customers: [] };
+        stats[ref].count++;
+        stats[ref].customers.push({ id: c.id, name: c.name, tags: c.tags, firstContact: c.firstContact });
+        c.tags.forEach(t => { stats[ref].tags[t] = (stats[ref].tags[t] || 0) + 1; });
+      } catch(e) {}
+    });
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(stats, null, 2));
     return;
   }
 
@@ -403,7 +431,7 @@ const server = http.createServer(async (req, res) => {
           if (msg.MsgType === 'event') {
             if (msg.Event === 'subscribe' || msg.Event === 'enter_agent') {
               const source = (msg.EventKey && msg.EventKey.includes('partner')) ? 'partner' : 'customer';
-              await sendWelcome(msg.FromUserName, source);
+              await sendWelcome(msg.FromUserName, source, msg.EventKey);
             }
             return;
           }
